@@ -1,7 +1,7 @@
 <script>
   import { InstancedMesh, Instance } from "@threlte/extras";
   import { T } from "@threlte/core";
-  import { FFT } from "../../store/State.svelte";
+  import { FFT } from "@/store/State.svelte";
   import { Color } from "three";
   const colorPrimary = new Color("#ff0000");
   const colorSecondary = new Color("#0000ff");

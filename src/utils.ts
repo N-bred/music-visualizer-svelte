@@ -1,4 +1,4 @@
-import { FFT } from "./store/State.svelte";
+import { FFT } from "@/store/State.svelte";
 
 export function constructFFT(audio: HTMLAudioElement, fftSize: number) {
   const audioCtx = new AudioContext();
