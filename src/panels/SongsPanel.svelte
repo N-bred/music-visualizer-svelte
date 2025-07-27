@@ -48,8 +48,10 @@
 
       <InputWithLabel labelContent="Select a song" name={SONG_FILE_INPUT} required={true} type="file" accept="audio/*" />
 
-      <Button type="submit" content="Upload Song" />
+      <Button type="submit">Upload Song</Button>
     </form>
   </div>
-  <Button content={showingUploadPanel.current ? "Show all Songs" : "Upload a song"} onclick={handleShowingUploadPanel} />
+  <Button onClick={handleShowingUploadPanel}>
+    {showingUploadPanel.current ? "Show all Songs" : "Upload a song"}
+  </Button>
 </div>

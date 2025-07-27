@@ -9,6 +9,7 @@
   oncreate={(ref) => {
     ref.lookAt(0, 0, 0);
   }}
+  
 >
   <OrbitControls enableDamping />
 </T.PerspectiveCamera>

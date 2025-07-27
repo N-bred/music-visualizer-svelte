@@ -10,3 +10,17 @@ export function createSongList(songs: Song[], songsFolder: string) {
     ...song,
   }));
 }
+
+export function calculateMinutesAndSeconds(duration: number) {
+  const min = Math.floor(duration / 60)
+    .toString()
+    .padStart(2, "0");
+  const sec = Math.floor(duration % 60)
+    .toString()
+    .padStart(2, "0");
+
+  return {
+    min,
+    sec,
+  };
+}
