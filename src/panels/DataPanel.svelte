@@ -1,5 +1,5 @@
 <script>
-  import { handleAnimationPaused, isAnimationPaused } from "@/store/State.svelte";
+  import { handleAnimationPaused, isAnimationPaused } from "@/store/PropertiesPanel.svelte";
 </script>
 
 <div class="panel-data" data-active="false">

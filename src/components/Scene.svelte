@@ -1,7 +1,8 @@
 <script lang="ts">
   import Camera from "./Camera.svelte";
   import { T, useTask } from "@threlte/core";
-  import { FFT, isAnimationPaused } from "@/store/State.svelte";
+  import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
+  import { FFT } from "@/store/State.svelte";
   import Chaotic from "@/scenes/Chaotic.svelte";
   let rotation = $state(0);
 

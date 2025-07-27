@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getCurrentSong, shouldPlayNext } from "@/store/songDataStore.svelte";
-  import { FFT, isPaused } from "@/store/State.svelte";
+  import { getCurrentSong, shouldPlayNext } from "@/store/SongPanel.svelte";
+  import { isPaused } from "@/store/PlayerPanel.svelte";
   import { constructFFT } from "@/utils";
+  import { FFT } from "@/store/State.svelte";
   let audioRef: HTMLAudioElement;
 
   onMount(() => {

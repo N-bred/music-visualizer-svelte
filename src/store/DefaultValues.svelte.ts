@@ -1,5 +1,5 @@
 import type { Song } from "@/types";
-import { randomID, createSongList } from "@/utils/";
+import { randomID } from "@/utils/";
 const MODE = import.meta.env.MODE;
 const DEVELOPMENT = "development";
 const PRODUCTION = "production";

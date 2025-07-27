@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Player from "@/components/Player.svelte";
   import Audio from "@/components/Audio.svelte";
-  import Canvas from "@/components/Canvas.svelte";
-  import TopBar from "@/components/TopBar.svelte";
-  import DataPanel from "@/components/DataPanel.svelte";
-  import SongsPanel from "@/components/SongsPanel.svelte";
+  import Player from "@/panels/Player.svelte";
+  import Canvas from "@/panels/Canvas.svelte";
+  import TopBar from "@/panels/TopBar.svelte";
+  import DataPanel from "@/panels/DataPanel.svelte";
+  import SongsPanel from "@/panels/SongsPanel.svelte";
 </script>
 
 <Audio />

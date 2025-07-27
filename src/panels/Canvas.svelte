@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Canvas } from "@threlte/core";
-  import Scene from "./Scene.svelte";
-  import { isAnimationPaused } from "@/store/State.svelte";
+  import Scene from "@/components/Scene.svelte";
+  import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
 </script>
 
 <div class="canvas-container">

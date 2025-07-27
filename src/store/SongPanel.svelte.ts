@@ -1,7 +1,8 @@
+import type { Song } from "@/types";
 import { createSongList } from "@/utils/";
-import { DEFAULT_SONGS, SONGS_FOLDER } from "./defaultValues.svelte";
+import { DEFAULT_SONGS, SONGS_FOLDER } from "./DefaultValues.svelte";
 
-export const songList = $state({ current: createSongList(DEFAULT_SONGS, SONGS_FOLDER) });
+export const songList: { current: Song[] } = $state({ current: createSongList(DEFAULT_SONGS, SONGS_FOLDER) });
 
 export const songCurrentIndex = $state({ current: 0 });
 
@@ -14,6 +15,11 @@ export const shouldPlayNext = $state({ current: false });
 export const handleSelectSong = (index: number) => {
   songCurrentIndex.current = index;
   shouldPlayNext.current = true;
+};
+
+export const addSong = (song: Song) => {
+  songList.current = [...songList.current, song];
+  handleSelectSong(songList.current.length - 1);
 };
 
 export const handlePreviousSong = () => {
