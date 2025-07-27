@@ -1,8 +1,13 @@
+<script lang="ts">
+  import { songList } from "@/store/songDataStore.svelte";
+  import SongList from "./micro/SongList.svelte";
+</script>
+
 <div class="panel-songs" data-active="false">
   <div class="song-list-container">
     <h3>ALL SONGS</h3>
     <span class="divider"></span>
-    <ul id="song-list"></ul>
+    <SongList songs={songList.current} />
   </div>
   <div class="song-upload-container hide">
     <form id="uploadSongForm">

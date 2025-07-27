@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { isPaused, handlePaused, handlePreviousSong, handleNextSong } from "@/store/State.svelte";
+  import { isPaused, handlePaused } from "@/store/State.svelte";
+  import { handlePreviousSong, handleNextSong } from "@/store/songDataStore.svelte";
 </script>
 
 <div class="player">

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getCurrentSong, isPaused, shouldPlayNext, FFT } from "@/store/State.svelte";
+  import { getCurrentSong, shouldPlayNext } from "@/store/songDataStore.svelte";
+  import { FFT, isPaused } from "@/store/State.svelte";
   import { constructFFT } from "@/utils";
   let audioRef: HTMLAudioElement;
 
@@ -20,4 +21,4 @@
   });
 </script>
 
-<audio id="main-audio" bind:this={audioRef} src={getCurrentSong()} bind:paused={isPaused.current}></audio>
+<audio id="main-audio" bind:this={audioRef} src={getCurrentSong().src} bind:paused={isPaused.current}></audio>
