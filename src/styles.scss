@@ -28,25 +28,19 @@ body {
   color: var(--font-color);
 }
 
-canvas {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-}
 
 .app {
   display: grid;
   background: var(--primary) url("/public/texture1.jpeg") center;
-
   background-size: cover;
   position: relative;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
   gap: 5px;
   padding: 5px;
   grid-template-columns: minmax(15%, 2fr) 8fr minmax(15%, 2fr);
-  grid-template-rows: 0.5fr 10.5fr 1fr;
+  grid-template-rows: 50px auto;
   grid-template-areas:
     "panel-songs top-bar panel-data"
     "panel-songs canvas-container panel-data"
@@ -515,5 +509,15 @@ form {
 
   100% {
     transform: scale(1);
+  }
+}
+.fa {
+  &.fa-volume {
+    &-off,
+    &-down,
+    &-up {
+      min-width: 20px;
+      min-height: 18px;
+    }
   }
 }
