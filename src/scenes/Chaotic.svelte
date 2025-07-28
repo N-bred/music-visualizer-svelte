@@ -3,7 +3,7 @@
   import { T } from "@threlte/core";
   import { FFT } from "@/store/State.svelte";
   import { Color } from "three";
-  const colorPrimary = new Color("#ff0000");
+  const colorPrimary = new Color("#ffffff");
   const colorSecondary = new Color("#0000ff");
   const angle = 2048 / (2 * 180);
 </script>
@@ -13,7 +13,7 @@
   <T.MeshBasicMaterial />
 
   {#if FFT.current}
-    {#each FFT.current as amplitude, i (i)}wsvelt
+    {#each FFT.current as amplitude, i (i)}
       <Instance
         position.x={Math.cos((i * angle * Math.PI) / 180) * 250}
         position.y={Math.sin((i * angle * Math.PI) / 180) * 250}

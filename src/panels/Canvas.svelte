@@ -1,11 +1,13 @@
 <script lang="ts">
   import { Canvas } from "@threlte/core";
   import Scene from "@/components/Scene.svelte";
+  import Camera from "@/components/Camera.svelte";
   import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
 </script>
 
 <div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}">
-  <Canvas autoRender={!isAnimationPaused.current}>
+  <Canvas renderMode="manual">
+    <Camera />
     <Scene />
   </Canvas>
   <div class="canvas-buttons">

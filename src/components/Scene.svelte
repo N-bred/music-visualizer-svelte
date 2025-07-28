@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Camera from "./Camera.svelte";
-  import { T, useTask } from "@threlte/core";
+  import { T, useTask, useThrelte } from "@threlte/core";
   import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
   import { FFT } from "@/store/State.svelte";
   import Chaotic from "@/scenes/Chaotic.svelte";
   import { onMount } from "svelte";
-  let rotation = $state(0);
+  const { advance } = useThrelte();
+  let firstRender = 0;
 
   onMount(() => {
     const handleResize = () => {
@@ -18,14 +18,23 @@
     return () => window.removeEventListener("resize", handleResize);
   });
 
+  let rotation = $state(0);
   useTask((delta) => {
-    if (!FFT.reload || isAnimationPaused.current) return;
+    if (!FFT.reload) return;
     FFT.reload();
     rotation += delta;
+
+    if (isAnimationPaused.current) {
+      if (firstRender < 2) {
+        firstRender += 1;
+        advance();
+      }
+    } else {
+      advance();
+    }
   });
 </script>
 
-<Camera />
 <T.Group rotation.z={rotation}>
   <Chaotic />
 </T.Group>
