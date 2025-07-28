@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
   import { InstancedMesh, Instance } from "@threlte/extras";
   import { T } from "@threlte/core";
   import { FFT } from "@/store/State.svelte";
-  import { Color } from "three";
-  const colorPrimary = new Color("#ffffff");
-  const colorSecondary = new Color("#0000ff");
+  import type { Theme } from "@/types";
+  const { theme }: { theme: Theme } = $props();
   const angle = 2048 / (2 * 180);
 </script>
 
@@ -20,7 +19,7 @@
         position.z={i}
         rotation.z={angle * i}
         scale.y={Math.max(amplitude / 2, 1)}
-        color={colorPrimary.clone().lerp(colorSecondary, amplitude / 180)}
+        color={theme.color.clone().lerp(theme.transitionColor, amplitude / 180)}
       />
     {/each}
   {/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getCurrentSong, shouldPlayNext } from "@/store/SongPanel.svelte";
+  import { getCurrentSong, shouldPlayNext } from "@/store/SongsPanel.svelte";
   import { isPaused, volume, setDuration, currentTime, setCurrentTime } from "@/store/PlayerPanel.svelte";
   import { constructFFT } from "@/utils";
   import { FFT } from "@/store/State.svelte";

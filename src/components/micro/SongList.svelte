@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Song } from "@/types";
-  import { getCurrentSong, handleSelectSong } from "@/store/SongPanel.svelte";
+  import { getCurrentSong, handleSelectSong } from "@/store/SongsPanel.svelte";
   import SongItem from "./SongItem.svelte";
   const { songs }: { songs: Song[] } = $props();
 </script>

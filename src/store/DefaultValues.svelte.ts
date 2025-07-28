@@ -1,8 +1,19 @@
-import type { Song } from "@/types";
+import type { Song, Theme } from "@/types";
 import { randomID } from "@/utils/";
+import { Color } from "three";
+
 const MODE = import.meta.env.MODE;
 const DEVELOPMENT = "development";
 const PRODUCTION = "production";
+
+export const CSS_VARIABLE_NAMES = [
+  {
+    name: "--accent-color",
+  },
+  {
+    name: "--song-selected-color",
+  },
+];
 
 export const SONGS_FOLDER = "/public/songs/";
 export let DEFAULT_SONGS: Song[] = [];
@@ -23,3 +34,26 @@ if (MODE === DEVELOPMENT) {
     },
   ];
 }
+
+export const DEFAULT_VOLUME = 1;
+
+export const DEFAULT_THEMES: Theme[] = [
+  {
+    name: "Purple",
+    color: new Color(0x2607a6),
+    transitionColor: new Color(0x5500ff),
+    backgroundColor: new Color(0x000000),
+  },
+  {
+    name: "Pink",
+    color: new Color(0xff00ff),
+    transitionColor: new Color(0x00ff00),
+    backgroundColor: new Color(0x000000),
+  },
+];
+
+export const DEFAULT_THEME_INDEX = 0;
+export const DEFAULT_ANIMATION_PAUSED = true;
+export const DEFAULT_ROTATION_ENABLED = true;
+export const DEFAULT_PAN_ENABLED = true;
+export const DEFAULT_ZOOM_ENABLED = true;

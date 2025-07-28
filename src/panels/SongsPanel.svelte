@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Song } from "@/types";
   import { randomID } from "@/utils/";
-  import { songList, addSong } from "@/store/SongPanel.svelte";
+  import { songList, addSong } from "@/store/SongsPanel.svelte";
   import SongList from "@/components/micro/SongList.svelte";
   import InputWithLabel from "@/components/micro/InputWithLabel.svelte";
   import Button from "@/components/micro/Button.svelte";

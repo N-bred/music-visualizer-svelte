@@ -1,6 +1,13 @@
 <script lang="ts">
-  import { handleAnimationPaused, isAnimationPaused, enablePan, enableRotation, enableZoom } from "@/store/PropertiesPanel.svelte";
+  import { isAnimationPaused, enablePan, enableRotation, enableZoom } from "@/store/PropertiesPanel.svelte";
   import CheckboxWithLabel from "@/components/micro/CheckboxWithLabel.svelte";
+  import { themes, currentTheme } from "@/store/PropertiesPanel.svelte";
+  import { CSS_VARIABLE_NAMES } from "@/store/DefaultValues.svelte";
+  import { updateCSSVariables } from "@/utils/";
+
+  $effect(() => {
+    updateCSSVariables(currentTheme.current, CSS_VARIABLE_NAMES);
+  });
 </script>
 
 <div class="panel-data" data-active="false">
@@ -27,7 +34,11 @@
     <div class="themes-container">
       <div class="themes-dropdown-container">
         <label for="themes-dropdown">Select a Theme: </label>
-        <select name="themes" id="themes-dropdown"></select>
+        <select name="themes" id="themes-dropdown" bind:value={currentTheme.current}>
+          {#each themes.current as theme}
+            <option value={theme}>{theme.name}</option>
+          {/each}
+        </select>
       </div>
       <div class="custom-theme-form-container hide">
         <form id="custom-theme-form">

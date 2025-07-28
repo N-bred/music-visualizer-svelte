@@ -1,4 +1,4 @@
-import type { Song } from "@/types";
+import type { Song, Theme } from "@/types";
 
 export function randomID(artistName: string, songName: string) {
   return artistName + " " + songName;
@@ -23,4 +23,30 @@ export function calculateMinutesAndSeconds(duration: number) {
     min,
     sec,
   };
+}
+
+export function getCssAccentColorValue(theme: Theme) {
+  const hsl = { h: 0, s: 0, l: 0 };
+  const transitionColorHSL = theme.transitionColor.getHSL({ ...hsl });
+  const colorHSL = theme.color.getHSL({ ...hsl });
+
+  if (transitionColorHSL.l > 0.2) {
+    return theme.transitionColor.getStyle();
+  } else if (colorHSL.l > 0.2) {
+    return theme.color.getStyle();
+  } else {
+    if (transitionColorHSL.l > colorHSL.l) {
+      return theme.transitionColor.clone().offsetHSL(0, 0, 0.6).getStyle();
+    } else {
+      return theme.color.clone().offsetHSL(0, 0, 0.6).getStyle();
+    }
+  }
+}
+
+export function updateCSSVariables(theme: Theme, properties: { name: string }[]) {
+  const value = getCssAccentColorValue(theme);
+
+  properties.forEach((property) => {
+    document.documentElement.style.setProperty(property.name, value);
+  });
 }

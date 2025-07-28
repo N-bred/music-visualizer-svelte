@@ -10,7 +10,7 @@
     getDerivedCurrentTime,
     getDerivedTotalDuration,
   } from "@/store/PlayerPanel.svelte";
-  import { handlePreviousSong, handleNextSong } from "@/store/SongPanel.svelte";
+  import { handlePreviousSong, handleNextSong } from "@/store/SongsPanel.svelte";
   import Button from "@/components/micro/Button.svelte";
   import Input from "@/components/micro/Input.svelte";
 

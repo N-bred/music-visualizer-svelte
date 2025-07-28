@@ -1,9 +1,10 @@
+import { DEFAULT_VOLUME } from "./DefaultValues.svelte";
 import { calculateMinutesAndSeconds } from "@/utils/";
 
 export const isPaused = $state({ current: true });
 export const handlePaused = () => (isPaused.current = !isPaused.current);
 
-export const volume = $state({ current: 1 });
+export const volume = $state({ current: DEFAULT_VOLUME });
 export const setVolume = (newVolume: number) => (volume.current = newVolume);
 
 export const duration = $state({ current: 0 });

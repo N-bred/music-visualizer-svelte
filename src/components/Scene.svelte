@@ -1,13 +1,15 @@
 <script lang="ts">
   import { T, useTask, useThrelte } from "@threlte/core";
-  import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
+  import { isAnimationPaused, currentTheme } from "@/store/PropertiesPanel.svelte";
   import { FFT } from "@/store/State.svelte";
   import Chaotic from "@/scenes/Chaotic.svelte";
   import { onMount } from "svelte";
-  const { advance } = useThrelte();
+  const { advance, scene } = useThrelte();
   let firstRender = 0;
 
   onMount(() => {
+    scene.background = currentTheme.current.backgroundColor;
+
     const handleResize = () => {
       const canvas = document.querySelector("canvas")!;
       canvas.style.width = "0";
@@ -36,5 +38,5 @@
 </script>
 
 <T.Group rotation.z={rotation}>
-  <Chaotic />
+  <Chaotic theme={currentTheme.current} />
 </T.Group>
