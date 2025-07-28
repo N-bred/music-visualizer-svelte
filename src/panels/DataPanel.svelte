@@ -1,5 +1,6 @@
-<script>
-  import { handleAnimationPaused, isAnimationPaused } from "@/store/PropertiesPanel.svelte";
+<script lang="ts">
+  import { handleAnimationPaused, isAnimationPaused, enablePan, enableRotation, enableZoom } from "@/store/PropertiesPanel.svelte";
+  import CheckboxWithLabel from "@/components/micro/CheckboxWithLabel.svelte";
 </script>
 
 <div class="panel-data" data-active="false">
@@ -57,17 +58,13 @@
       <button id="custom-themes-delete-button">Delete Selected Theme</button>
     </div>
     <span class="divider"></span>
-    <label for="enable-animation-checkbox">Enable animation?</label>
-    <input type="checkbox" name="enable-animation" id="enable-animation-checkbox" data-enabled="false" />
-    <label for="enable-rotation-checkbox">Enable camera rotation?</label>
-    <input type="checkbox" name="enable-rotation" id="enable-rotation-checkbox" data-enabled="true" />
-    <label for="enable-pan-checkbox">Enable camera pan?</label>
-    <input type="checkbox" name="enable-pan" id="enable-pan-checkbox" data-enabled="true" />
-    <label for="enable-zoom-checkbox">Enable camera zoom?</label>
-    <input type="checkbox" name="enable-zoom" id="enable-zoom-checkbox" data-enabled="true" />
+
+    <CheckboxWithLabel bind:checked={isAnimationPaused.current} name="enable-animation" labelContent="Disable Animation?" />
+
+    <CheckboxWithLabel bind:checked={enableRotation.current} name="enable-rotation" labelContent="Enable camera rotation?" />
+
+    <CheckboxWithLabel bind:checked={enablePan.current} name="enable-pan" labelContent="Enable camera pan?" />
+
+    <CheckboxWithLabel bind:checked={enableZoom.current} name="enable-zoom" labelContent="Enable camera zoom?" />
   </div>
 </div>
-
-<!-- <div class="player">
-  <button onclick={handleAnimationPaused}>{isAnimationPaused.current ? "Play" : "Pause"} Animation</button>
-</div> -->

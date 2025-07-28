@@ -1,6 +1,7 @@
 <script>
   import { T } from "@threlte/core";
   import { OrbitControls } from "@threlte/extras";
+  import { enableRotation, enablePan, enableZoom } from "@/store/PropertiesPanel.svelte";
 </script>
 
 <T.PerspectiveCamera
@@ -9,7 +10,6 @@
   oncreate={(ref) => {
     ref.lookAt(0, 0, 0);
   }}
-  
 >
-  <OrbitControls enableDamping />
+  <OrbitControls enableDamping enableRotate={enableRotation.current} enablePan={enablePan.current} enableZoom={enableZoom.current} />
 </T.PerspectiveCamera>

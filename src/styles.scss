@@ -28,7 +28,6 @@ body {
   color: var(--font-color);
 }
 
-
 .app {
   display: grid;
   background: var(--primary) url("/public/texture1.jpeg") center;
@@ -170,6 +169,11 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   position: relative;
+
+  &.disabled, canvas {
+    touch-action: none;
+    pointer-events: none;
+  }
 
   .canvas-buttons {
     position: absolute;

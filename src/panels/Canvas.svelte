@@ -4,7 +4,7 @@
   import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
 </script>
 
-<div class="canvas-container">
+<div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}">
   <Canvas autoRender={!isAnimationPaused.current}>
     <Scene />
   </Canvas>
