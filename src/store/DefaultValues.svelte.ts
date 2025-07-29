@@ -1,6 +1,8 @@
-import type { Song, Theme } from "@/types";
+import type { Scene, SceneName, Song, Theme } from "@/types";
 import { randomID } from "@/utils/";
 import { Color } from "three";
+import Chaotic from "@/scenes/Chaotic.svelte";
+import FlatCircle from "@/scenes/FlatCircle.svelte";
 
 const MODE = import.meta.env.MODE;
 const DEVELOPMENT = "development";
@@ -57,3 +59,12 @@ export const DEFAULT_ANIMATION_PAUSED = true;
 export const DEFAULT_ROTATION_ENABLED = true;
 export const DEFAULT_PAN_ENABLED = true;
 export const DEFAULT_ZOOM_ENABLED = true;
+
+export const DEFAULT_SCENES = {
+  Chaotic,
+  FlatCircle,
+} as const;
+
+export const DEFAULT_SCENE_INDEX: SceneName = "Chaotic";
+
+export const DEFAULT_SCENES_NAMES = Object.keys(DEFAULT_SCENES) as [SceneName];

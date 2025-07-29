@@ -3,20 +3,12 @@
   import CheckboxWithLabel from "@/components/micro/CheckboxWithLabel.svelte";
   import Divider from "@/components/micro/Divider.svelte";
   import ThemesHandler from "@/components/ThemesHandler.svelte";
+  import SceneHandler from "@/components/SceneHandler.svelte";
 </script>
 
 <div class="panel-data">
   <div class="properties-container">
-    <div class="scenes-container">
-      <div class="scenes-dropdown-container">
-        <label for="scenes-dropdown">Select a Scene: </label>
-        <select name="scenes"></select>
-      </div>
-      <div class="scenes-properties-container hide">
-        <form></form>
-      </div>
-      <button> Modify Scene Properties </button>
-    </div>
+    <SceneHandler />
 
     <Divider />
 

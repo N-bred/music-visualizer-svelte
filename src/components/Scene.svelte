@@ -1,9 +1,11 @@
 <script lang="ts">
   import { T, useTask, useThrelte } from "@threlte/core";
-  import { isAnimationPaused, currentTheme } from "@/store/PropertiesPanel.svelte";
+  import { isAnimationPaused, currentTheme, currentScene } from "@/store/PropertiesPanel.svelte";
   import { FFT } from "@/store/State.svelte";
-  import Chaotic from "@/scenes/Chaotic.svelte";
   import { onMount } from "svelte";
+  import { DEFAULT_SCENES, DEFAULT_SCENES_NAMES } from "@/store/DefaultValues.svelte";
+  import { useThemesColors } from "@/hooks/useThemeColors.svelte";
+  import type { SceneName } from "@/types";
   const { advance, scene } = useThrelte();
   let firstRender = 0;
 
@@ -37,8 +39,13 @@
       advance();
     }
   });
+
+  const { color, fallbackColor } = useThemesColors();
 </script>
 
 <T.Group rotation.z={rotation}>
-  <Chaotic theme={currentTheme.current} />
+  {#each DEFAULT_SCENES_NAMES as key}
+    {@const Component = DEFAULT_SCENES[key]};
+    <Component {color} {fallbackColor} showing={currentScene.current === key} />
+  {/each}
 </T.Group>

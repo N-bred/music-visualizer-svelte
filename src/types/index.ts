@@ -1,3 +1,5 @@
+import type { DEFAULT_SCENES } from "@/store/DefaultValues.svelte";
+import type { Component, ComponentProps } from "svelte";
 import type { Color, WebGLRenderer, PerspectiveCamera, Group } from "three";
 
 type HTMLInputTypes =
@@ -76,14 +78,6 @@ export type State = {
   sceneInputProperties: [];
 };
 
-// export type StateManagerChildren = {
-//   player: PlayerType;
-//   songPanel: SongPanelType;
-//   propertiesPanel: PropertiesPanel;
-//   canvasPanel: CanvasPanel;
-//   fpsCounter: Stats;
-// };
-
 export type PersistedValue<T> = { value: T; set: (newValue: T) => { value: T } };
 
 export type PersistedValues = {
@@ -97,28 +91,13 @@ export type PersistedValues = {
   themes: PersistedValue<Theme[]>;
 };
 
-// export type StateManagerProps = {
-//   canvasContainer: HTMLDivElement;
-//   audioManager: AudioManager;
-//   sceneManager: SceneManager;
-//   camera: PerspectiveCamera;
-//   orbitControls: OrbitControls;
-//   renderer: WebGLRenderer;
-//   updateFn: () => void;
-//   state: State;
-//   persistedValues: PersistedValues;
-// } & StateManagerChildren;
-
 export type Scene = {
   name: string;
 };
-
-// export type SceneManagerProps = {
-//   scenes: Scene[];
-//   index: number;
-// };
 
 export type ConstructedFFT = {
   reloadFFT: () => void;
   fft: Uint8Array<ArrayBuffer>;
 };
+
+export type SceneName = keyof typeof DEFAULT_SCENES;

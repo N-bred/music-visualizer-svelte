@@ -1,4 +1,3 @@
-import type { Theme } from "@/types";
 import {
   DEFAULT_THEMES,
   DEFAULT_ANIMATION_PAUSED,
@@ -6,7 +5,9 @@ import {
   DEFAULT_ROTATION_ENABLED,
   DEFAULT_THEME_INDEX,
   DEFAULT_ZOOM_ENABLED,
+  DEFAULT_SCENES_NAMES,
 } from "./DefaultValues.svelte";
+import type { Theme, SceneName } from "@/types";
 
 export const isAnimationPaused = $state({ current: DEFAULT_ANIMATION_PAUSED });
 export const handleAnimationPaused = () => (isAnimationPaused.current = !isAnimationPaused.current);
@@ -54,3 +55,7 @@ export const deleteTheme = () => {
 export const setThemeFromIndex = (index: number) => {
   currentTheme.current = themes.current[index];
 };
+
+export const scenes: { current: [SceneName] } = $state({ current: DEFAULT_SCENES_NAMES });
+
+export const currentScene: { current: SceneName } = $state({ current: scenes.current[0] });
