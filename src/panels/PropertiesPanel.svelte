@@ -1,74 +1,28 @@
 <script lang="ts">
   import { isAnimationPaused, enablePan, enableRotation, enableZoom } from "@/store/PropertiesPanel.svelte";
   import CheckboxWithLabel from "@/components/micro/CheckboxWithLabel.svelte";
-  import { themes, currentTheme } from "@/store/PropertiesPanel.svelte";
-  import { CSS_VARIABLE_NAMES } from "@/store/DefaultValues.svelte";
-  import { updateCSSVariables } from "@/utils/";
-
-  $effect(() => {
-    updateCSSVariables(currentTheme.current, CSS_VARIABLE_NAMES);
-  });
+  import Divider from "@/components/micro/Divider.svelte";
+  import ThemesHandler from "@/components/ThemesHandler.svelte";
 </script>
 
-<div class="panel-data" data-active="false">
+<div class="panel-data">
   <div class="properties-container">
     <div class="scenes-container">
       <div class="scenes-dropdown-container">
         <label for="scenes-dropdown">Select a Scene: </label>
-        <select name="themes" id="scenes-dropdown"></select>
+        <select name="scenes"></select>
       </div>
       <div class="scenes-properties-container hide">
-        <form id="scene-properties-form"></form>
+        <form></form>
       </div>
-      <button
-        id="scenes-properties-button"
-        data-open="false"
-        data-first-panel-text="Show all Scenes"
-        data-second-panel-text="Modify Scene Properties"
-      >
-        Modify Scene Properties
-      </button>
+      <button> Modify Scene Properties </button>
     </div>
 
-    <span class="divider"></span>
-    <div class="themes-container">
-      <div class="themes-dropdown-container">
-        <label for="themes-dropdown">Select a Theme: </label>
-        <select name="themes" id="themes-dropdown" bind:value={currentTheme.current}>
-          {#each themes.current as theme}
-            <option value={theme}>{theme.name}</option>
-          {/each}
-        </select>
-      </div>
-      <div class="custom-theme-form-container hide">
-        <form id="custom-theme-form">
-          <label for="custom-color-name">Color Name: </label>
-          <input type="text" name="custom-color-name" id="custom-color-name" required />
-          <label for="initial-color-input">Initial Color: </label>
-          <input type="color" name="initial-color" id="initial-color-input" required />
-          <label for="transition-color-input">Transition Color: </label>
-          <input type="color" name="transition-color" id="transition-color-input" required />
-          <label for="background-color-input">Background Color: </label>
-          <input type="color" name="background-color" id="background-color-input" required />
-          <button id="custom-theme-form-button" type="submit" data-add-text="Add Custom Theme" data-update-text="Update Custom Theme">
-            Add Custom Theme
-          </button>
-        </form>
-      </div>
-      <button id="custom-themes-add-button" data-open="false" data-first-panel-text="Show all Themes" data-second-panel-text="Add a Theme">
-        Add a Theme
-      </button>
-      <button
-        id="custom-themes-update-button"
-        data-open="false"
-        data-first-panel-text="Show all Themes"
-        data-second-panel-text="Update Selected Theme"
-      >
-        Update Selected Theme
-      </button>
-      <button id="custom-themes-delete-button">Delete Selected Theme</button>
-    </div>
-    <span class="divider"></span>
+    <Divider />
+
+    <ThemesHandler />
+
+    <Divider />
 
     <CheckboxWithLabel bind:checked={isAnimationPaused.current} name="enable-animation" labelContent="Disable Animation?" />
 

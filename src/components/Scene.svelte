@@ -8,8 +8,6 @@
   let firstRender = 0;
 
   onMount(() => {
-    scene.background = currentTheme.current.backgroundColor;
-
     const handleResize = () => {
       const canvas = document.querySelector("canvas")!;
       canvas.style.width = "0";
@@ -18,6 +16,10 @@
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  });
+
+  $effect(() => {
+    scene.background = currentTheme.current.backgroundColor;
   });
 
   let rotation = $state(0);

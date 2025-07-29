@@ -1,10 +1,8 @@
 <script>
   import Input from "./Input.svelte";
 
-  const { labelContent, name, placeholder = "", required, type, defaultValue = "", accept = "" } = $props();
-
-  const value = $state({ current: defaultValue });
+  let { labelContent, name, placeholder = "", required, type, value = $bindable(), accept = "", onChange = (() =>{}) } = $props();
 </script>
 
 <label for={name + "input"}>{labelContent}</label>
-<Input {type} {name} id={name + "input"} {placeholder} {required} {accept} defaultValue={value.current} />
+<Input {type} {name} id={name + "input"} {placeholder} {required} {accept} bind:value onChange={onChange} />
