@@ -1,6 +1,6 @@
 import type { DEFAULT_SCENES } from "@/store/DefaultValues.svelte";
 import type { Component, ComponentProps } from "svelte";
-import type { Color, WebGLRenderer, PerspectiveCamera, Group } from "three";
+import type { Color, Vector3, Group, BoxGeometry } from "three";
 
 type HTMLInputTypes =
   | "button"
@@ -100,4 +100,11 @@ export type ConstructedFFT = {
   fft: Uint8Array<ArrayBuffer>;
 };
 
-export type SceneName = keyof typeof DEFAULT_SCENES;
+export type SceneNames = typeof DEFAULT_SCENES;
+export type SceneName = SceneNames[number];
+export type SceneExport = {
+  onCreate: (geometry: BoxGeometry) => void;
+  dynamicValues: (amplitude: number) => { scale: [x: number, y: number, z: number] };
+  precalculateValues: (FFT: number[]) => { position: [x: number, y: number, z: number]; rotation: [x: number, y: number, z: number] }[];
+};
+export type SceneMap = Record<SceneName, SceneExport>;
