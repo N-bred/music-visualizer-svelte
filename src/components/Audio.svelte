@@ -37,7 +37,7 @@
 <audio
   id="main-audio"
   bind:this={audioRef}
-  src={getCurrentSong().src}
+  src={getCurrentSong?.()?.src}
   bind:paused={isPaused.current}
   volume={volume.current}
   bind:currentTime={currentTime.current}
