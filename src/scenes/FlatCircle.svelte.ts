@@ -1,11 +1,6 @@
 import type { SceneExport } from "@/types";
-import type { BoxGeometry } from "three";
 
 const radius = 250;
-
-const onCreate = (geometry: BoxGeometry) => {
-  geometry.translate(1 * 0.5, 0, 0);
-};
 
 const dynamicValues = (amplitude: number) => {
   return {
@@ -14,18 +9,19 @@ const dynamicValues = (amplitude: number) => {
 };
 
 const precalculateValues = (FFT: number[]) => {
+  const quantity = FFT.length / 2;
+  const angle = (Math.PI * 2) / quantity;
   const values = [];
   for (let i = 0; i < FFT.length; ++i) {
     values.push({
-      position: [Math.cos(i * ((Math.PI * 2) / FFT.length)) * radius, Math.sin(i * ((Math.PI * 2) / FFT.length)) * radius, 0],
-      rotation: [0, 0, 0],
+      position: [Math.cos(i * angle) * radius, Math.sin(i * angle) * radius, 0],
+      rotation: [0, 0, angle],
     });
   }
   return values;
 };
 
 export default {
-  onCreate,
   dynamicValues,
   precalculateValues,
 } as SceneExport;

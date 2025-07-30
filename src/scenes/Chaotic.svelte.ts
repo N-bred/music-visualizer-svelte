@@ -1,12 +1,7 @@
 import type { SceneExport } from "@/types";
-import type { BoxGeometry } from "three";
-import { Vector3 } from "three";
 
-const angle = 2048 / (2 * 180);
 const radius = 250;
 const degree = 180;
-
-const onCreate = (geometry: BoxGeometry) => {};
 
 const dynamicValues = (amplitude: number) => {
   return {
@@ -15,6 +10,8 @@ const dynamicValues = (amplitude: number) => {
 };
 
 const precalculateValues = (FFT: number[]) => {
+  const quantity = FFT.length / 2;
+  const angle = quantity / (2 * degree);
   const values = [];
   for (let i = 0; i < FFT.length; ++i) {
     values.push({
@@ -26,7 +23,6 @@ const precalculateValues = (FFT: number[]) => {
 };
 
 export default {
-  onCreate,
   dynamicValues,
   precalculateValues,
 } as SceneExport;

@@ -102,9 +102,12 @@ export type ConstructedFFT = {
 
 export type SceneNames = typeof DEFAULT_SCENES;
 export type SceneName = SceneNames[number];
+export type Vector3Return = [x: number, y: number, z: number];
+export type SceneProperties = { position: Vector3Return; rotation: Vector3Return }[];
+
 export type SceneExport = {
-  onCreate: (geometry: BoxGeometry) => void;
-  dynamicValues: (amplitude: number) => { scale: [x: number, y: number, z: number] };
-  precalculateValues: (FFT: number[]) => { position: [x: number, y: number, z: number]; rotation: [x: number, y: number, z: number] }[];
+  dynamicValues: (amplitude: number) => { scale: Vector3Return };
+  precalculateValues: (FFT: number[]) => SceneProperties;
 };
+
 export type SceneMap = Record<SceneName, SceneExport>;

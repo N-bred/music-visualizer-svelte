@@ -1,18 +1,29 @@
 <script lang="ts">
   import { InstancedMesh, Instance } from "@threlte/extras";
-  import { T } from "@threlte/core";
+  import { T, useTask } from "@threlte/core";
   import { FFT } from "@/store/State.svelte";
-  import { currentScene } from "@/store/PropertiesPanel.svelte";
+  import { currentScene, isTransitionRunning, previousScene } from "@/store/PropertiesPanel.svelte";
   import sceneMap from "@/scenes/";
-  import type { BoxGeometry } from "three";
+  import { lerpSceneProperties } from "@/utils/";
 
-  let geometryRef: BoxGeometry | undefined = $state();
-  let sceneProperties = $derived(sceneMap[currentScene.current]);
-  let calculatedValues = $derived(sceneMap[currentScene.current].precalculateValues(FFT.current || []));
+  let targetSceneProperties = $derived(sceneMap[currentScene.current].precalculateValues(FFT.current || []));
 
-  $effect(() => {
-    if (geometryRef) {
-      sceneMap[currentScene.current].onCreate(geometryRef);
+  let finalSceneProperties = $derived(sceneMap[previousScene.current].precalculateValues(FFT.current || []));
+
+  let dynamicValues = $derived(sceneMap[previousScene.current].dynamicValues);
+
+  let transitionTimer = $state(0);
+
+  useTask((delta) => {
+    if (isTransitionRunning.current) {
+      if (transitionTimer < 1) {
+        finalSceneProperties = lerpSceneProperties(finalSceneProperties, targetSceneProperties, transitionTimer, "easeInOutSine");
+        transitionTimer += delta;
+      } else {
+        isTransitionRunning.current = false;
+        transitionTimer = 0;
+        previousScene.current = currentScene.current;
+      }
     }
   });
 
@@ -20,17 +31,16 @@
 </script>
 
 <InstancedMesh>
-  <T.BoxGeometry args={[1, 1, 1]} bind:ref={geometryRef} />
+  <T.BoxGeometry args={[1, 1, 1]} />
   <T.MeshBasicMaterial />
 
   {#if FFT.current}
-    {#each FFT.current as amplitude, i (i)}
-      {@const dynamicValue = sceneProperties.dynamicValues(amplitude)}
+    {#each { length: FFT.current.length / 2 } as _, i (i)}
       <Instance
-        position={calculatedValues[i].position}
-        rotation={calculatedValues[i].rotation}
-        scale={dynamicValue.scale}
-        color={color(amplitude, 180)}
+        position={finalSceneProperties[i].position}
+        rotation={finalSceneProperties[i].rotation}
+        scale={dynamicValues(FFT.current[i]).scale}
+        color={color(FFT.current[i], 150)}
       />
     {/each}
   {/if}

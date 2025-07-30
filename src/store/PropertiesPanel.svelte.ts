@@ -8,7 +8,7 @@ import {
   DEFAULT_SCENES,
   DEFAULT_SCENE_INDEX,
 } from "./DefaultValues.svelte";
-import type { SceneNames, Theme } from "@/types";
+import type { SceneName, SceneNames, Theme } from "@/types";
 
 export const isAnimationPaused = $state({ current: DEFAULT_ANIMATION_PAUSED });
 export const handleAnimationPaused = () => (isAnimationPaused.current = !isAnimationPaused.current);
@@ -57,6 +57,10 @@ export const setThemeFromIndex = (index: number) => {
   currentTheme.current = themes.current[index];
 };
 
-export const scenes: { current: SceneNames } = $state({ current: DEFAULT_SCENES });
+export const scenes = $state({ current: DEFAULT_SCENES });
 
-export const currentScene = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
+export const currentScene: { current: SceneName } = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
+
+export const previousScene: { current: SceneName } = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
+
+export const isTransitionRunning = $state({ current: false });
