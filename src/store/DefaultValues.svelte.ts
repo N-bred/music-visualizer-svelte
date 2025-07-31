@@ -1,4 +1,4 @@
-import type { SceneNames, Song, Theme } from "@/types";
+import type { Song, Theme } from "@/types";
 import { randomID } from "@/utils/";
 import { Color } from "three";
 

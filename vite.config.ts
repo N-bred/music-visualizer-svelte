@@ -13,5 +13,19 @@ export default ({ mode }: { mode: string }) => {
     },
     base,
     plugins: [svelte()],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes('three')) {
+                return 'three'
+              }
+              return "vendor";
+            }
+          },
+        },
+      },
+    },
   });
 };

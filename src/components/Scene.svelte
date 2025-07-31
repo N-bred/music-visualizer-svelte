@@ -1,6 +1,6 @@
 <script lang="ts">
   import { T, useTask, useThrelte } from "@threlte/core";
-  import { isAnimationPaused, currentTheme, currentScene } from "@/store/PropertiesPanel.svelte";
+  import { isAnimationPaused, currentTheme } from "@/store/PropertiesPanel.svelte";
   import { FFT } from "@/store/State.svelte";
   import { onMount } from "svelte";
   import { useThemesColors } from "@/hooks/useThemeColors.svelte";

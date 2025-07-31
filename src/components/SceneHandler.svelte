@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { scenes, currentScene, isTransitionRunning, previousScene } from "@/store/PropertiesPanel.svelte";
-  import type { SceneName } from "@/types/";
+  import { scenes, currentScene, isTransitionRunning } from "@/store/PropertiesPanel.svelte";
 </script>
 
 <div class="scenes-container">

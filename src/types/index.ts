@@ -1,6 +1,5 @@
 import type { DEFAULT_SCENES } from "@/store/DefaultValues.svelte";
-import type { Component, ComponentProps } from "svelte";
-import type { Color, Vector3, Group, BoxGeometry } from "three";
+import type { Color, Group } from "three";
 
 type HTMLInputTypes =
   | "button"

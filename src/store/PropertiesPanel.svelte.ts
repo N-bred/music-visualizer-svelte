@@ -8,7 +8,7 @@ import {
   DEFAULT_SCENES,
   DEFAULT_SCENE_INDEX,
 } from "./DefaultValues.svelte";
-import type { SceneName, SceneNames, Theme } from "@/types";
+import type { SceneName, Theme } from "@/types";
 
 export const isAnimationPaused = $state({ current: DEFAULT_ANIMATION_PAUSED });
 export const handleAnimationPaused = () => (isAnimationPaused.current = !isAnimationPaused.current);
