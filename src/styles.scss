@@ -176,10 +176,6 @@ canvas {
   font-weight: 300;
   position: relative;
 
-  &, & canvas {
-    user-select: none;
-  }
-
   &.disabled,
   &.disabled canvas {
     touch-action: none;
