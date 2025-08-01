@@ -1,4 +1,4 @@
-import * as T from "three";
+import { Scene, Mesh, BoxGeometry, MeshBasicMaterial, Group } from "three";
 import { FFT_QUANTITY } from "@/store/DefaultValues.svelte";
 import { currentTheme, isTransitionRunning, currentScene, previousScene } from "@/store/PropertiesPanel.svelte";
 import type { MeshGroup, SceneDynamicValues, SceneProperties } from "@/types";
@@ -6,10 +6,10 @@ import sceneMap from "@/scenes/";
 import { lerpSceneProperties } from "@/utils/";
 import type { LerpFunctions } from "@/utils/lerp";
 
-export default class Scene extends T.Scene {
-  boxGeometry = new T.BoxGeometry(1, 1, 1);
-  boxMaterial = new T.MeshBasicMaterial();
-  groups: MeshGroup[] = [new T.Group() as MeshGroup];
+export default class CustomScene extends Scene {
+  boxGeometry = new BoxGeometry(1, 1, 1);
+  boxMaterial = new MeshBasicMaterial();
+  groups: MeshGroup[] = [new Group() as MeshGroup];
   transitionTimer: number = 0;
   maxScalar: number = 256;
 
@@ -29,7 +29,7 @@ export default class Scene extends T.Scene {
   setup() {
     this.groups.forEach((group) => {
       for (let i = 0; i < FFT_QUANTITY; ++i) {
-        group.add(new T.Mesh(this.boxGeometry, this.boxMaterial.clone()));
+        group.add(new Mesh(this.boxGeometry, this.boxMaterial.clone()));
       }
       this.add(group);
     });

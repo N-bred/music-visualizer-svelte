@@ -18,8 +18,8 @@ export default ({ mode }: { mode: string }) => {
         output: {
           manualChunks(id) {
             if (id.includes("node_modules")) {
-              if (id.includes('three')) {
-                return 'three'
+              if (id.includes("three")) {
+                return "three";
               }
               return "vendor";
             }

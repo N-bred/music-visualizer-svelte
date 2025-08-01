@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as T from "three";
+  import { PerspectiveCamera, Vector3, WebGLRenderer, Clock } from "three";
   import { OrbitControls } from "three/examples/jsm/Addons.js";
   import { FFT } from "@/store/State.svelte";
-  import Scene from "@/scenes/Scene.svelte";
+  import CustomScene from "@/scenes/Scene.svelte";
   import { isAnimationPaused, enableRotation, enablePan, enableZoom } from "@/store/PropertiesPanel.svelte";
 
   let canvasContainerRef: HTMLDivElement;
@@ -14,8 +14,8 @@
     height: 0,
   });
 
-  let camera: T.PerspectiveCamera;
-  let renderer: T.WebGLRenderer;
+  let camera: PerspectiveCamera;
+  let renderer: WebGLRenderer;
   let orbitControls: OrbitControls;
   let update: () => void;
   let animationFrame: number;
@@ -24,10 +24,10 @@
     if (!canvasRef || !canvasContainerRef) return;
     SIZE.width = canvasContainerRef.getBoundingClientRect().width;
     SIZE.height = canvasContainerRef.getBoundingClientRect().height;
-    camera = new T.PerspectiveCamera(75, SIZE.width / SIZE.height, 10, 1500);
-    camera.lookAt(new T.Vector3(0, 0, 0));
+    camera = new PerspectiveCamera(75, SIZE.width / SIZE.height, 10, 1500);
+    camera.lookAt(new Vector3(0, 0, 0));
 
-    renderer = new T.WebGLRenderer({ canvas: canvasRef });
+    renderer = new WebGLRenderer({ canvas: canvasRef });
     renderer.setSize(SIZE.width, SIZE.height);
 
     orbitControls = new OrbitControls(camera, canvasRef);
@@ -36,8 +36,8 @@
     camera.position.set(0, 0, 1200);
     orbitControls.update();
 
-    const scene = new Scene();
-    const clock = new T.Clock();
+    const scene = new CustomScene();
+    const clock = new Clock();
 
     update = () => {
       FFT.reload?.();
