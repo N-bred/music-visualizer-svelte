@@ -4,11 +4,12 @@
   import { isPaused, volume, setDuration, currentTime, setCurrentTime } from "@/store/PlayerPanel.svelte";
   import { constructFFT } from "@/utils";
   import { FFT } from "@/store/State.svelte";
+  import { FFT_SIZE } from "@/store/DefaultValues.svelte";
   let audioRef: HTMLAudioElement;
 
   onMount(() => {
     if (!audioRef) return;
-    FFT.reload = constructFFT(audioRef, 2048);
+    FFT.reload = constructFFT(audioRef, FFT_SIZE);
 
     audioRef.onloadedmetadata = () => {
       setDuration(audioRef.duration);

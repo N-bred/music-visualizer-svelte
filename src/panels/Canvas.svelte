@@ -3,6 +3,14 @@
   import Scene from "@/components/Scene.svelte";
   import Camera from "@/components/Camera.svelte";
   import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
+  import { handleResize } from "@/utils/handleResize";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
 </script>
 
 <div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}">

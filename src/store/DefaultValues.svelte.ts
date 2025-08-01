@@ -15,6 +15,9 @@ export const CSS_VARIABLE_NAMES = [
   },
 ];
 
+export const FFT_SIZE = 2048;
+export const FFT_QUANTITY = FFT_SIZE / 2;
+
 export const SONGS_FOLDER = "/public/songs/";
 export let DEFAULT_SONGS: Song[] = [];
 
