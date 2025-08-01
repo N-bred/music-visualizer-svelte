@@ -1,5 +1,5 @@
 import type { DEFAULT_SCENES } from "@/store/DefaultValues.svelte";
-import type { Color, Group } from "three";
+import type { Color, Group, Mesh, BoxGeometry, MeshBasicMaterial, Object3DEventMap } from "three";
 
 type HTMLInputTypes =
   | "button"
@@ -103,10 +103,12 @@ export type SceneNames = typeof DEFAULT_SCENES;
 export type SceneName = SceneNames[number];
 export type Vector3Return = [x: number, y: number, z: number];
 export type SceneProperties = { position: Vector3Return; rotation: Vector3Return }[];
+export type SceneDynamicValues = (amplitude: number) => { scale: Vector3Return };
 
 export type SceneExport = {
-  dynamicValues: (amplitude: number) => { scale: Vector3Return };
+  dynamicValues: SceneDynamicValues;
   precalculateValues: (FFT: number[]) => SceneProperties;
 };
 
 export type SceneMap = Record<SceneName, SceneExport>;
+export type MeshGroup = Group & { children: Mesh<BoxGeometry, MeshBasicMaterial, Object3DEventMap>[] };

@@ -1,6 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import * as T from "three";
+  import { OrbitControls } from "three/examples/jsm/Addons.js";
+  import { FFT } from "@/store/State.svelte";
+  import Scene from "@/scenes/Scene.svelte";
+  import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
 
   let canvasContainerRef: HTMLDivElement;
   let canvasRef: HTMLCanvasElement;
@@ -12,6 +16,9 @@
 
   let camera: T.PerspectiveCamera;
   let renderer: T.WebGLRenderer;
+  let orbitControls: OrbitControls;
+  let update: (delta: number) => void;
+  let animationFrame: number;
 
   onMount(() => {
     if (!canvasRef || !canvasContainerRef) return;
@@ -24,14 +31,51 @@
     renderer = new T.WebGLRenderer({ canvas: canvasRef });
     renderer.setSize(SIZE.width, SIZE.height);
 
-    window.addEventListener("resize", () => {
+    orbitControls = new OrbitControls(camera, renderer.domElement);
+    orbitControls.enableDamping = true;
+    orbitControls.enableRotate = true;
+    orbitControls.enablePan = true;
+    orbitControls.enableZoom = true;
+
+    const scene = new Scene();
+
+    update = (delta: number) => {
+      FFT.reload?.();
+      if (!FFT.current) return;
+      scene.animate(FFT.current, delta);
+      orbitControls.update();
+      renderer.render(scene, camera);
+      animationFrame = requestAnimationFrame(update);
+    };
+
+    let firstRender = false;
+
+    while (!firstRender) {
+      update(0);
+      firstRender = true;
+    }
+
+    const handleResize = () => {
       SIZE.width = canvasContainerRef.getBoundingClientRect().width;
       SIZE.height = canvasContainerRef.getBoundingClientRect().height;
 
       camera.aspect = SIZE.width / SIZE.height;
       camera.updateProjectionMatrix();
       renderer.setSize(SIZE.width, SIZE.height);
-    });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  });
+
+  $effect(() => {
+    isAnimationPaused.current;
+
+    if (isAnimationPaused.current) {
+      cancelAnimationFrame(animationFrame);
+    } else {
+      requestAnimationFrame(update);
+    }
   });
 </script>
 
