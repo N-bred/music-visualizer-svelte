@@ -84,8 +84,8 @@
   });
 </script>
 
-<div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}" bind:this={canvasContainerRef}>
-  <canvas bind:this={canvasRef}></canvas>
+<div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}" bind:this={canvasContainerRef} draggable="false">
+  <canvas bind:this={canvasRef} draggable="false"></canvas>
   <div class="canvas-buttons">
     <button aria-label="button" class="canvas-theater-button" title="Theater Mode"><i class="fa fa-television" aria-hidden="true"></i></button>
     <button aria-label="button" class="canvas-fullscreen-button" title="Fullscreen"><i class="fa fa-square-o" aria-hidden="true"></i></button>
