@@ -177,7 +177,7 @@ canvas {
   position: relative;
 
   &.disabled,
-  canvas {
+  &.disabled canvas {
     touch-action: none;
     pointer-events: none;
   }

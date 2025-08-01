@@ -107,7 +107,7 @@ export type SceneDynamicValues = (amplitude: number) => { scale: Vector3Return }
 
 export type SceneExport = {
   dynamicValues: SceneDynamicValues;
-  precalculateValues: (FFT: number[]) => SceneProperties;
+  precalculateValues: () => SceneProperties;
 };
 
 export type SceneMap = Record<SceneName, SceneExport>;

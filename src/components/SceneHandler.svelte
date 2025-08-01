@@ -8,7 +8,7 @@
     <select
       name="scenes"
       bind:value={currentScene.current}
-      onchange={(e: Event) => {
+      onchange={() => {
         isTransitionRunning.current = true;
       }}
     >

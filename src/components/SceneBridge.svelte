@@ -9,9 +9,9 @@
 
   const { color } = $props();
 
-  let targetSceneProperties = $derived(sceneMap[currentScene.current].precalculateValues(FFT.current || []));
+  let targetSceneProperties = $derived(sceneMap[currentScene.current].precalculateValues());
 
-  let finalSceneProperties = $derived(sceneMap[previousScene.current].precalculateValues(FFT.current || []));
+  let finalSceneProperties = $derived(sceneMap[previousScene.current].precalculateValues());
 
   let dynamicValues = $derived(sceneMap[previousScene.current].dynamicValues);
 

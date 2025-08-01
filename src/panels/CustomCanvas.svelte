@@ -4,7 +4,7 @@
   import { OrbitControls } from "three/examples/jsm/Addons.js";
   import { FFT } from "@/store/State.svelte";
   import Scene from "@/scenes/Scene.svelte";
-  import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
+  import { isAnimationPaused, enableRotation, enablePan, enableZoom } from "@/store/PropertiesPanel.svelte";
 
   let canvasContainerRef: HTMLDivElement;
   let canvasRef: HTMLCanvasElement;
@@ -17,7 +17,7 @@
   let camera: T.PerspectiveCamera;
   let renderer: T.WebGLRenderer;
   let orbitControls: OrbitControls;
-  let update: (delta: number) => void;
+  let update: () => void;
   let animationFrame: number;
 
   onMount(() => {
@@ -25,33 +25,34 @@
     SIZE.width = canvasContainerRef.getBoundingClientRect().width;
     SIZE.height = canvasContainerRef.getBoundingClientRect().height;
     camera = new T.PerspectiveCamera(75, SIZE.width / SIZE.height, 10, 1500);
-    camera.position.set(0, 0, 1200);
     camera.lookAt(new T.Vector3(0, 0, 0));
 
     renderer = new T.WebGLRenderer({ canvas: canvasRef });
     renderer.setSize(SIZE.width, SIZE.height);
 
-    orbitControls = new OrbitControls(camera, renderer.domElement);
+    orbitControls = new OrbitControls(camera, canvasRef);
     orbitControls.enableDamping = true;
-    orbitControls.enableRotate = true;
-    orbitControls.enablePan = true;
-    orbitControls.enableZoom = true;
+
+    camera.position.set(0, 0, 1200);
+    orbitControls.update();
 
     const scene = new Scene();
+    const clock = new T.Clock();
 
-    update = (delta: number) => {
+    update = () => {
       FFT.reload?.();
       if (!FFT.current) return;
+      const delta = clock.getDelta();
       scene.animate(FFT.current, delta);
-      orbitControls.update();
       renderer.render(scene, camera);
+      orbitControls.update();
       animationFrame = requestAnimationFrame(update);
     };
 
     let firstRender = false;
 
     while (!firstRender) {
-      update(0);
+      update();
       firstRender = true;
     }
 
@@ -76,10 +77,14 @@
     } else {
       requestAnimationFrame(update);
     }
+
+    orbitControls.enableRotate = enableRotation.current;
+    orbitControls.enablePan = enablePan.current;
+    orbitControls.enableZoom = enableZoom.current;
   });
 </script>
 
-<div class="canvas-container disabledd" bind:this={canvasContainerRef}>
+<div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}" bind:this={canvasContainerRef}>
   <canvas bind:this={canvasRef}></canvas>
   <div class="canvas-buttons">
     <button aria-label="button" class="canvas-theater-button" title="Theater Mode"><i class="fa fa-television" aria-hidden="true"></i></button>

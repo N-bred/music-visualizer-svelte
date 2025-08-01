@@ -10,7 +10,7 @@ const dynamicValues = (amplitude: number) => {
   };
 };
 
-const precalculateValues = (FFT: number[]) => {
+const precalculateValues = () => {
   const angle = FFT_QUANTITY / (2 * degree);
   const values = [];
   for (let i = 0; i < FFT_QUANTITY; ++i) {
