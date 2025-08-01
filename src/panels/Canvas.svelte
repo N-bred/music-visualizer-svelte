@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Canvas } from "@threlte/core";
+  import { PerfMonitor } from '@threlte/extras'
   import Scene from "@/components/Scene.svelte";
   import Camera from "@/components/Camera.svelte";
   import { isAnimationPaused } from "@/store/PropertiesPanel.svelte";
@@ -15,6 +16,7 @@
 
 <div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}">
   <Canvas renderMode="manual">
+    <PerfMonitor/>
     <Camera />
     <Scene />
   </Canvas>

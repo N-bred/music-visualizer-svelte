@@ -6,7 +6,6 @@
   import sceneMap from "@/scenes/";
   import { lerpSceneProperties } from "@/utils/";
   import { FFT_QUANTITY } from "@/store/DefaultValues.svelte";
-  import type { Vector3Return } from "@/types/";
 
   const { color } = $props();
 
@@ -43,14 +42,6 @@
         rotation={finalSceneProperties[i].rotation}
         scale={dynamicValues(FFT.current[i]).scale}
         color={color(FFT.current[i], 100)}
-      />
-      <Instance
-        position.x={finalSceneProperties[i].position[0] * -1}
-        position.y={finalSceneProperties[i].position[1] * -1}
-        position.z={finalSceneProperties[i].position[2]}
-        rotation={finalSceneProperties[i].rotation}
-        scale={dynamicValues(FFT.current[i]).scale}
-        color={color(FFT.current[i], 400)}
       />
     {/each}
   {/if}
