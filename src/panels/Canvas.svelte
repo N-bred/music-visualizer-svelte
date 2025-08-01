@@ -36,7 +36,7 @@
     camera.position.set(0, 0, 1200);
     orbitControls.update();
 
-    const scene = new CustomScene();
+    const scene = new CustomScene(0.3, "easeOutSine");
     const clock = new Clock();
 
     update = () => {

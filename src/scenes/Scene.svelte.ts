@@ -12,6 +12,8 @@ export default class CustomScene extends Scene {
   groups: MeshGroup[] = [new Group() as MeshGroup];
   transitionTimer: number = 0;
   maxScalar: number = 256;
+  transitionSpeed: number;
+  lerpType: LerpFunctions = "linear";
 
   initialSceneProperties = $derived(sceneMap[previousScene.current].precalculateValues());
 
@@ -21,8 +23,10 @@ export default class CustomScene extends Scene {
 
   dynamicValues: SceneDynamicValues = $derived(sceneMap[previousScene.current].dynamicValues);
 
-  constructor() {
+  constructor(transitionSpeed: number = 0.3, lerpType: LerpFunctions = 'linear') {
     super();
+    this.transitionSpeed = transitionSpeed;
+    this.lerpType = lerpType;
     this.setup();
   }
 
@@ -77,7 +81,7 @@ export default class CustomScene extends Scene {
     this.background = currentTheme.current.backgroundColor;
     this.rotation.z -= delta;
 
-    const running = this.useSceneTransition(0.3, "easeOutSine", delta);
+    const running = this.useSceneTransition(this.transitionSpeed, this.lerpType, delta);
 
     this.groups.forEach((group, gi) => {
       for (let i = 0; i < FFT_QUANTITY; ++i) {
