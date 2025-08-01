@@ -10,7 +10,7 @@
     getDerivedCurrentTime,
     getDerivedTotalDuration,
   } from "@/store/PlayerPanel.svelte";
-  import { handlePreviousSong, handleNextSong } from "@/store/SongsPanel.svelte";
+  import { handlePreviousSong, handleNextSong, getCurrentSong } from "@/store/SongsPanel.svelte";
   import Button from "@/components/micro/Button.svelte";
   import Input from "@/components/micro/Input.svelte";
 
@@ -54,7 +54,13 @@
       <i class="fa fa-step-backward" aria-hidden="true"></i>
     </Button>
 
-    <Button className={isPaused.current ? " play-button" : "pause-button"} onClick={handlePaused}>
+    <Button
+      className={isPaused.current ? " play-button" : "pause-button"}
+      onClick={() => {
+        if (!getCurrentSong()) return;
+        handlePaused();
+      }}  
+    >
       <i class="fa {isPaused.current ? 'fa-play' : 'fa-pause'}" aria-hidden="true"></i>
     </Button>
 
@@ -81,7 +87,7 @@
       step={0.1}
       required={false}
       onInput={handleVolumeInput}
-      defaultValue={volume.current.toString()}
+      value={volume.current.toString()}
     />
 
     <i class="fa fa-volume-up" aria-hidden="true"></i>
