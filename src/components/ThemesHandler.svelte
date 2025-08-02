@@ -43,8 +43,8 @@
 
     addNewTheme({
       name: "",
-      color: new Color("#ffffff"),
-      transitionColor: new Color("#000000"),
+      color: new Color("#000000"),
+      transitionColor: new Color("#ffffff"),
       backgroundColor: new Color("#000000"),
     });
 

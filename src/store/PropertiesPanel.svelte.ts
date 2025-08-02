@@ -64,3 +64,4 @@ export const currentScene: { current: SceneName } = $state({ current: scenes.cur
 export const previousScene: { current: SceneName } = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
 
 export const isTransitionRunning = $state({ current: false });
+export const scenePropsRequireUpdate = $state({ current: false });

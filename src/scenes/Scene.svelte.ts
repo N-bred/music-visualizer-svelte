@@ -1,6 +1,6 @@
 import { Scene, Mesh, BoxGeometry, MeshBasicMaterial, Group } from "three";
 import { FFT_QUANTITY } from "@/store/DefaultValues.svelte";
-import { currentTheme, isTransitionRunning, currentScene, previousScene } from "@/store/PropertiesPanel.svelte";
+import { currentTheme, isTransitionRunning, currentScene, previousScene, scenePropsRequireUpdate } from "@/store/PropertiesPanel.svelte";
 import type { MeshGroup, SceneDynamicValues, SceneProperties } from "@/types";
 import sceneMap from "@/scenes/";
 import { lerpSceneProperties } from "@/utils/";
@@ -87,7 +87,7 @@ export default class CustomScene extends Scene {
       for (let i = 0; i < FFT_QUANTITY; ++i) {
         const amp = FFT[i] / 1.7;
 
-        if (running) {
+        if (running || scenePropsRequireUpdate.current) {
           this.updateSceneAtIndex({ groupIndex: gi, index: i, sceneProperties: this.finalSceneProperties });
         }
 
@@ -102,5 +102,7 @@ export default class CustomScene extends Scene {
         this.maxScalar = this.maxScalar < FFT[i] ? FFT[i] : this.maxScalar;
       }
     });
+
+    scenePropsRequireUpdate.current = false;
   }
 }

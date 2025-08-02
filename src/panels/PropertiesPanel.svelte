@@ -23,5 +23,7 @@
     <CheckboxWithLabel bind:checked={enablePan.current} name="enable-pan" labelContent="Enable camera pan?" />
 
     <CheckboxWithLabel bind:checked={enableZoom.current} name="enable-zoom" labelContent="Enable camera zoom?" />
+
+    <button onclick={() => localStorage.clear()}>Clear Storaged Values</button>
   </div>
 </div>

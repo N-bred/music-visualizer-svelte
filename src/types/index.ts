@@ -103,11 +103,21 @@ export type SceneNames = typeof DEFAULT_SCENES;
 export type SceneName = SceneNames[number];
 export type Vector3Return = [x: number, y: number, z: number];
 export type SceneProperties = { position: Vector3Return; rotation: Vector3Return }[];
+
 export type SceneDynamicValues = (amplitude: number) => { scale: Vector3Return };
+
+export type SceneModifier = {
+  set: (newValue: any) => any;
+  value: any;
+  type: string;
+  label: string;
+  min?: number;
+};
 
 export type SceneExport = {
   dynamicValues: SceneDynamicValues;
   precalculateValues: () => SceneProperties;
+  modifiers: Record<string, SceneModifier>;
 };
 
 export type SceneMap = Record<SceneName, SceneExport>;
