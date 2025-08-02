@@ -8,6 +8,7 @@
     <select
       name="scenes"
       bind:value={currentScene.current}
+      disabled={isTransitionRunning.current}
       onchange={() => {
         isTransitionRunning.current = true;
       }}

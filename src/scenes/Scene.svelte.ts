@@ -23,7 +23,7 @@ export default class CustomScene extends Scene {
 
   dynamicValues: SceneDynamicValues = $derived(sceneMap[previousScene.current].dynamicValues);
 
-  constructor(transitionSpeed: number = 0.3, lerpType: LerpFunctions = 'linear') {
+  constructor(transitionSpeed: number = 0.3, lerpType: LerpFunctions = "linear") {
     super();
     this.transitionSpeed = transitionSpeed;
     this.lerpType = lerpType;
@@ -85,24 +85,22 @@ export default class CustomScene extends Scene {
 
     this.groups.forEach((group, gi) => {
       for (let i = 0; i < FFT_QUANTITY; ++i) {
+        const amp = FFT[i] / 1.7;
+
         if (running) {
           this.updateSceneAtIndex({ groupIndex: gi, index: i, sceneProperties: this.finalSceneProperties });
         }
 
         if (this.dynamicValues) {
-          group.children[i].scale.x = this.dynamicValues(FFT[i]).scale[0];
-          group.children[i].scale.y = this.dynamicValues(FFT[i]).scale[1];
-          group.children[i].scale.z = this.dynamicValues(FFT[i]).scale[2];
+          group.children[i].scale.x = this.dynamicValues(amp).scale[0];
+          group.children[i].scale.y = this.dynamicValues(amp).scale[1];
+          group.children[i].scale.z = this.dynamicValues(amp).scale[2];
         }
 
-        group.children[i].material.color.lerpColors(
-          currentTheme.current.color,
-          currentTheme.current.transitionColor,
-          Math.max(FFT[i] / this.maxScalar || 1)
-        );
+        group.children[i].material.color.lerpColors(currentTheme.current.color, currentTheme.current.transitionColor, FFT[i] / this.maxScalar);
+
+        this.maxScalar = this.maxScalar < FFT[i] ? FFT[i] : this.maxScalar;
       }
     });
-
-    this.maxScalar = FFT[0];
   }
 }

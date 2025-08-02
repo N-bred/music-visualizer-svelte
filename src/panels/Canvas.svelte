@@ -24,7 +24,7 @@
     if (!canvasRef || !canvasContainerRef) return;
     SIZE.width = canvasContainerRef.getBoundingClientRect().width;
     SIZE.height = canvasContainerRef.getBoundingClientRect().height;
-    camera = new PerspectiveCamera(75, SIZE.width / SIZE.height, 10, 1500);
+    camera = new PerspectiveCamera(75, SIZE.width / SIZE.height, 1, 3000);
     camera.lookAt(new Vector3(0, 0, 0));
 
     renderer = new WebGLRenderer({ canvas: canvasRef });
@@ -33,7 +33,7 @@
     orbitControls = new OrbitControls(camera, canvasRef);
     orbitControls.enableDamping = true;
 
-    camera.position.set(0, 0, 1200);
+    camera.position.set(0, 0, 1000);
     orbitControls.update();
 
     const scene = new CustomScene(0.3, "easeOutSine");
