@@ -5,6 +5,7 @@
   import TopBar from "@/panels/TopBar.svelte";
   import PropertiesPanel from "@/panels/PropertiesPanel.svelte";
   import SongsPanel from "@/panels/SongsPanel.svelte";
+  import MobileMenu from "./panels/MobileMenu.svelte";
 </script>
 
 <Audio />
@@ -13,3 +14,4 @@
 <PropertiesPanel />
 <Canvas />
 <Player />
+<MobileMenu/>
