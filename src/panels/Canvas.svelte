@@ -18,7 +18,6 @@
   let renderer: WebGLRenderer;
   let orbitControls: OrbitControls;
   let update: () => void;
-  let animationFrame: number;
 
   onMount(() => {
     if (!canvasRef || !canvasContainerRef) return;
@@ -46,11 +45,9 @@
       scene.animate(FFT.current, delta);
       renderer.render(scene, camera);
       orbitControls.update();
-      animationFrame = requestAnimationFrame(update);
     };
 
     let firstRender = false;
-
     while (!firstRender) {
       update();
       firstRender = true;
@@ -71,9 +68,9 @@
 
   $effect(() => {
     if (isAnimationPaused.current) {
-      cancelAnimationFrame(animationFrame);
+      renderer.setAnimationLoop(null);
     } else {
-      requestAnimationFrame(update);
+      renderer.setAnimationLoop(update);
     }
   });
 

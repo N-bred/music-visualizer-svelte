@@ -11,9 +11,8 @@ import {
 import type { SceneName, Theme } from "@/types";
 import { usePersistedState } from "@/hooks/usePersistedState.svelte";
 import { usePersistedThemes } from "@/hooks/usePersistedThemes.svelte";
-import { useLocalStorage } from "@/utils/localStorage";
 
-export const isAnimationPaused = usePersistedState("isAnimationRunning", DEFAULT_ANIMATION_PAUSED);
+export const isAnimationPaused = usePersistedState("isAnimationPaused", DEFAULT_ANIMATION_PAUSED);
 export const handleAnimationPaused = () => (isAnimationPaused.current = !isAnimationPaused.current);
 
 export const enableRotation = usePersistedState("rotationEnabled", DEFAULT_ROTATION_ENABLED);
