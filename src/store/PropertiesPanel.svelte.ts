@@ -5,16 +5,15 @@ import {
   DEFAULT_ROTATION_ENABLED,
   DEFAULT_THEME_INDEX,
   DEFAULT_ZOOM_ENABLED,
-  DEFAULT_SCENES,
-  DEFAULT_SCENE_INDEX,
 } from "./DefaultValues.svelte";
+import { DEFAULT_SCENES, DEFAULT_SCENE_INDEX } from "@/scenes/index.svelte";
 import type { SceneName, Theme } from "@/types";
 import { usePersistedState } from "@/hooks/usePersistedState.svelte";
 import { usePersistedThemes } from "@/hooks/usePersistedThemes.svelte";
 
 export const isAnimationPaused = usePersistedState("isAnimationPaused", DEFAULT_ANIMATION_PAUSED);
 export const handleAnimationPaused = (cond?: boolean) => {
-  if (typeof cond === 'boolean') {
+  if (typeof cond === "boolean") {
     isAnimationPaused.current = cond;
     return;
   }

@@ -60,6 +60,3 @@ export const DEFAULT_ANIMATION_PAUSED = true;
 export const DEFAULT_ROTATION_ENABLED = true;
 export const DEFAULT_PAN_ENABLED = true;
 export const DEFAULT_ZOOM_ENABLED = true;
-
-export const DEFAULT_SCENES = ["Chaotic", "FlatCircle"] as const;
-export const DEFAULT_SCENE_INDEX = 0;

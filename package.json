@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "gen:scenes": "node serverScripts/genScenes.cjs",
+    "gen:scene": "node serverScripts/genScene.cjs",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run gen:scenes && vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },

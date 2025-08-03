@@ -1,7 +1,7 @@
 <script lang="ts">
   import { scenePropsRequireUpdate, currentScene } from "@/store/PropertiesPanel.svelte";
   import InputWithLabel from "./micro/InputWithLabel.svelte";
-  import sceneMap from "@/scenes/";
+  import sceneMap from "@/scenes/index.svelte";
 
   let modifiers = $derived(sceneMap[currentScene.current].modifiers);
 

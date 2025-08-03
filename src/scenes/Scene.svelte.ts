@@ -2,7 +2,7 @@ import { Scene, Mesh, BoxGeometry, MeshBasicMaterial, Group } from "three";
 import { FFT_QUANTITY } from "@/store/DefaultValues.svelte";
 import { isTransitionRunning, currentScene, previousScene, scenePropsRequireUpdate, getCurrentTheme } from "@/store/PropertiesPanel.svelte";
 import type { MeshGroup, SceneDynamicValues, SceneProperties } from "@/types";
-import sceneMap from "@/scenes/";
+import sceneMap from "@/scenes/index.svelte";
 import { lerpSceneProperties } from "@/utils/";
 import type { LerpFunctions } from "@/utils/lerp";
 
