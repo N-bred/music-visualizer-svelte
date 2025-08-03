@@ -3,7 +3,14 @@ import { DEFAULT_VOLUME } from "./DefaultValues.svelte";
 import { calculateMinutesAndSeconds } from "@/utils/";
 
 export const isPaused = $state({ current: true });
-export const handlePaused = () => (isPaused.current = !isPaused.current);
+
+export const handlePaused = (cond?: boolean) => {
+  if (typeof cond === "boolean") {
+    isPaused.current = cond;
+    return;
+  }
+  isPaused.current = !isPaused.current;
+};
 
 export const volume = usePersistedState("volume", DEFAULT_VOLUME);
 export const setVolume = (newVolume: number) => (volume.current = newVolume);

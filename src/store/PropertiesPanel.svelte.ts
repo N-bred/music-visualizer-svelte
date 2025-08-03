@@ -13,7 +13,13 @@ import { usePersistedState } from "@/hooks/usePersistedState.svelte";
 import { usePersistedThemes } from "@/hooks/usePersistedThemes.svelte";
 
 export const isAnimationPaused = usePersistedState("isAnimationPaused", DEFAULT_ANIMATION_PAUSED);
-export const handleAnimationPaused = () => (isAnimationPaused.current = !isAnimationPaused.current);
+export const handleAnimationPaused = (cond?: boolean) => {
+  if (typeof cond === 'boolean') {
+    isAnimationPaused.current = cond;
+    return;
+  }
+  isAnimationPaused.current = !isAnimationPaused.current;
+};
 
 export const enableRotation = usePersistedState("rotationEnabled", DEFAULT_ROTATION_ENABLED);
 export const handleEnableRotation = () => (enableRotation.current = !enableRotation.current);

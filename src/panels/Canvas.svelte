@@ -5,6 +5,7 @@
   import { FFT } from "@/store/State.svelte";
   import CustomScene from "@/scenes/Scene.svelte";
   import { isAnimationPaused, enableRotation, enablePan, enableZoom } from "@/store/PropertiesPanel.svelte";
+  import { handleFullScreen, handleTheatherMode, isFullscreen, isTheaterMode, stats } from "@/store/CanvasPanel.svelte";
 
   let canvasContainerRef: HTMLDivElement;
   let canvasRef: HTMLCanvasElement;
@@ -13,9 +14,6 @@
     width: 0,
     height: 0,
   });
-
-  let isFullscreen = $state(false);
-  let isTheaterMode = $state(false);
 
   let camera: PerspectiveCamera;
   let renderer: WebGLRenderer;
@@ -45,6 +43,7 @@
       FFT.reload?.();
       if (!FFT.current) return;
       const delta = clock.getDelta();
+      stats.update();
       scene.animate(FFT.current, delta);
       renderer.render(scene, camera);
       orbitControls.update();
@@ -67,7 +66,7 @@
 
     const handleFullScreenEvent = () => {
       const condition = !!(document.fullscreenElement ?? false);
-      isFullscreen = condition;
+      isFullscreen.current = condition;
     };
 
     document.addEventListener("fullscreenchange", handleFullScreenEvent);
@@ -92,33 +91,18 @@
     orbitControls.enablePan = enablePan.current;
     orbitControls.enableZoom = enableZoom.current;
   });
-
-  function handleFullScreen() {
-    if (!canvasRef) return;
-
-    if (isFullscreen) {
-      document.exitFullscreen();
-    } else {
-      canvasContainerRef.requestFullscreen();
-    }
-  }
-
-  function handleTheatherMode() {
-    isTheaterMode = !isTheaterMode;
-    document.getElementById("app")!.classList.toggle("theater");
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 40);
-  }
 </script>
 
 <div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}" bind:this={canvasContainerRef}>
   <canvas bind:this={canvasRef}></canvas>
   <div class="canvas-buttons">
-    <button aria-label="button" class="canvas-theater-button {isTheaterMode ? 'active' : ''}" title="Theater Mode" onclick={handleTheatherMode}
-      ><i class="fa fa-television" aria-hidden="true"></i></button
+    <button
+      aria-label="button"
+      class="canvas-theater-button {isTheaterMode.current ? 'active' : ''}"
+      title="Theater Mode"
+      onclick={handleTheatherMode}><i class="fa fa-television" aria-hidden="true"></i></button
     >
-    <button aria-label="button" class="canvas-fullscreen-button {isFullscreen ? 'active' : ''}" title="Fullscreen" onclick={handleFullScreen}
+    <button aria-label="button" class="canvas-fullscreen-button {isFullscreen.current ? 'active' : ''}" title="Fullscreen" onclick={handleFullScreen}
       ><i class="fa fa-square-o" aria-hidden="true"></i></button
     >
   </div>
