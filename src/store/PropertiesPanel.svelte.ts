@@ -65,6 +65,18 @@ export const setThemeFromIndex = (index: number) => {
   currentThemeIndex.current = index;
 };
 
+export const handlePreviousTheme = () => {
+  const previousTheme = currentThemeIndex.current - 1;
+  if (previousTheme < 0) return;
+  setThemeFromIndex(previousTheme);
+};
+
+export const handleNextTheme = () => {
+  const nextTheme = currentThemeIndex.current + 1;
+  if (nextTheme > themes.current.length - 1) return;
+  setThemeFromIndex(nextTheme);
+};
+
 export const scenes = $state({ current: DEFAULT_SCENES });
 
 export const currentScene: { current: SceneName } = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
@@ -73,3 +85,19 @@ export const previousScene: { current: SceneName } = $state({ current: scenes.cu
 
 export const isTransitionRunning = $state({ current: false });
 export const scenePropsRequireUpdate = $state({ current: false });
+
+export const handleNextScene = () => {
+  if (isTransitionRunning.current) return;
+  const nextScene = scenes.current.findIndex((scene) => scene === currentScene.current) + 1;
+  if (nextScene > scenes.current.length - 1) return;
+  currentScene.current = scenes.current[nextScene];
+  isTransitionRunning.current = true;
+};
+
+export const handlePreviousScene = () => {
+  if (isTransitionRunning.current) return;
+  const nextScene = scenes.current.findIndex((scene) => scene === currentScene.current) - 1;
+  if (nextScene < 0) return;
+  currentScene.current = scenes.current[nextScene];
+  isTransitionRunning.current = true;
+};

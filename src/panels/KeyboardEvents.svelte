@@ -1,7 +1,7 @@
 <script lang="ts">
   import { handlePreviousSong, handleNextSong } from "@/store/SongsPanel.svelte";
   import { handlePaused } from "@/store/PlayerPanel.svelte";
-  import { handleAnimationPaused } from "@/store/PropertiesPanel.svelte";
+  import { handleAnimationPaused, handleNextScene, handleNextTheme, handlePreviousScene, handlePreviousTheme } from "@/store/PropertiesPanel.svelte";
   import { handleFullScreen, handleTheatherMode, handleFPSCounter } from "@/store/CanvasPanel.svelte";
 
   window.addEventListener("keyup", (e) => {
@@ -34,13 +34,37 @@
         case "KeyO":
           handleAnimationPaused();
           break;
-        case "KeyL":
+        case "KeyK":
           handlePaused(true);
           handleAnimationPaused(true);
           break;
-        case "KeyK":
+        case "KeyL":
           handlePaused(false);
           handleAnimationPaused(false);
+          break;
+        case "KeyM":
+          handleNextTheme();
+          break;
+        case "KeyN":
+          handlePreviousTheme();
+          break;
+        case "Quote":
+          handleNextTheme();
+          break;
+        case "Semicolon":
+          handlePreviousTheme();
+          break;
+        case "KeyH":
+          handlePreviousScene();
+          break;
+        case "Period":
+          handleNextScene();
+          break;
+        case "Comma":
+          handlePreviousScene();
+          break;
+        case "KeyJ":
+          handleNextScene();
           break;
         case "KeyF":
           handleFullScreen();

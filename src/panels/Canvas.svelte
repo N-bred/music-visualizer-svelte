@@ -55,6 +55,13 @@
       firstRender = true;
     }
 
+    if (isTheaterMode.current) {
+      document.getElementById("app")!.classList.toggle("theater");
+      setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+      }, 40);
+    }
+
     const handleResize = () => {
       SIZE.width = canvasContainerRef.getBoundingClientRect().width;
       SIZE.height = canvasContainerRef.getBoundingClientRect().height;
