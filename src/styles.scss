@@ -40,8 +40,12 @@ canvas {
     "panel-data canvas-container canvas-container"
     "player player player";
   grid-template-rows: 4.5fr 5.5fr 1fr;
-  transition: grid-template-rows 0.3s ease-in-out;
+  transition: grid-template-rows 0.03s ease-in-out;
   grid-template-columns: 29% 71%;
+
+  @media screen and (min-width: 1600px) {
+    grid-template-columns: 15% 85%;
+  }
 
   & .top-bar {
     display: none;
@@ -82,7 +86,7 @@ canvas {
     }
   }
 
-  .theater {
+  &.theater {
     @include theater-mode();
   }
 
@@ -172,13 +176,11 @@ canvas {
   font-weight: 300;
   position: relative;
 
-  &,
   & canvas {
     user-select: none;
     cursor: grab;
   }
 
-  &.disabled,
   &.disabled canvas {
     touch-action: none;
     pointer-events: none;
@@ -191,6 +193,12 @@ canvas {
     display: flex;
     z-index: 1;
     gap: 5px;
+
+    .canvas-theater-button {
+      @media screen and (max-width: 1600px) {
+        display: none;
+      }
+    }
 
     @media screen and (max-width: 768px) {
       display: none;

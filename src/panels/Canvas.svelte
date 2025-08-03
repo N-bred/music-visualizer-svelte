@@ -14,6 +14,9 @@
     height: 0,
   });
 
+  let isFullscreen = $state(false);
+  let isTheaterMode = $state(false);
+
   let camera: PerspectiveCamera;
   let renderer: WebGLRenderer;
   let orbitControls: OrbitControls;
@@ -62,8 +65,18 @@
       renderer.setSize(SIZE.width, SIZE.height);
     };
 
+    const handleFullScreenEvent = () => {
+      const condition = !!(document.fullscreenElement ?? false);
+      isFullscreen = condition;
+    };
+
+    document.addEventListener("fullscreenchange", handleFullScreenEvent);
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullScreenEvent);
+      window.removeEventListener("resize", handleResize);
+    };
   });
 
   $effect(() => {
@@ -79,12 +92,34 @@
     orbitControls.enablePan = enablePan.current;
     orbitControls.enableZoom = enableZoom.current;
   });
+
+  function handleFullScreen() {
+    if (!canvasRef) return;
+
+    if (isFullscreen) {
+      document.exitFullscreen();
+    } else {
+      canvasContainerRef.requestFullscreen();
+    }
+  }
+
+  function handleTheatherMode() {
+    isTheaterMode = !isTheaterMode;
+    document.getElementById("app")!.classList.toggle("theater");
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 40);
+  }
 </script>
 
 <div class="canvas-container {isAnimationPaused.current ? 'disabled' : ''}" bind:this={canvasContainerRef}>
   <canvas bind:this={canvasRef}></canvas>
   <div class="canvas-buttons">
-    <button aria-label="button" class="canvas-theater-button" title="Theater Mode"><i class="fa fa-television" aria-hidden="true"></i></button>
-    <button aria-label="button" class="canvas-fullscreen-button" title="Fullscreen"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+    <button aria-label="button" class="canvas-theater-button {isTheaterMode ? 'active' : ''}" title="Theater Mode" onclick={handleTheatherMode}
+      ><i class="fa fa-television" aria-hidden="true"></i></button
+    >
+    <button aria-label="button" class="canvas-fullscreen-button {isFullscreen ? 'active' : ''}" title="Fullscreen" onclick={handleFullScreen}
+      ><i class="fa fa-square-o" aria-hidden="true"></i></button
+    >
   </div>
 </div>
