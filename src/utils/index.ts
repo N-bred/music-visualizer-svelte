@@ -1,5 +1,7 @@
 import type { Song, Theme, Vector3Return, SceneProperties } from "@/types";
 import { useLerp, type LerpFunctions } from "./lerp";
+import { Color } from "three";
+
 export function randomID(artistName: string, songName: string) {
   return artistName + " " + songName;
 }
@@ -75,3 +77,16 @@ export const lerpSceneProperties = (
 
   return properties;
 };
+
+export function createThemeFromJSON(
+  jsonTheme: Theme[] | { name: string; color: number; transitionColor: number; backgroundColor: number }[]
+): Theme[] {
+  return jsonTheme
+    .filter((theme) => theme.name !== "")
+    .map((theme) => ({
+      name: theme.name,
+      color: new Color(theme.color),
+      transitionColor: new Color(theme.transitionColor),
+      backgroundColor: new Color(theme.backgroundColor),
+    }));
+}

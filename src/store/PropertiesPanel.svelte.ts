@@ -9,52 +9,56 @@ import {
   DEFAULT_SCENE_INDEX,
 } from "./DefaultValues.svelte";
 import type { SceneName, Theme } from "@/types";
+import { usePersistedState } from "@/hooks/usePersistedState.svelte";
+import { usePersistedThemes } from "@/hooks/usePersistedThemes.svelte";
+import { useLocalStorage } from "@/utils/localStorage";
 
-export const isAnimationPaused = $state({ current: DEFAULT_ANIMATION_PAUSED });
+export const isAnimationPaused = usePersistedState("isAnimationRunning", DEFAULT_ANIMATION_PAUSED);
 export const handleAnimationPaused = () => (isAnimationPaused.current = !isAnimationPaused.current);
 
-export const enableRotation = $state({ current: DEFAULT_ROTATION_ENABLED });
+export const enableRotation = usePersistedState("rotationEnabled", DEFAULT_ROTATION_ENABLED);
 export const handleEnableRotation = () => (enableRotation.current = !enableRotation.current);
 
-export const enablePan = $state({ current: DEFAULT_PAN_ENABLED });
+export const enablePan = usePersistedState("panEnabled", DEFAULT_PAN_ENABLED);
 export const handleEnablePan = () => (enablePan.current = !enablePan.current);
 
-export const enableZoom = $state({ current: DEFAULT_ZOOM_ENABLED });
+export const enableZoom = usePersistedState("zoomEnabled", DEFAULT_ZOOM_ENABLED);
 export const handleEnableZoom = () => (enableZoom.current = !enableZoom.current);
 
-export const themes: { current: Theme[] } = $state({ current: DEFAULT_THEMES });
-export const currentTheme = $state({ current: themes.current[DEFAULT_THEME_INDEX] });
-const currentThemeIndex = $derived(themes.current.findIndex((theme) => theme.name === currentTheme.current.name));
+export const themes: { current: Theme[] } = usePersistedThemes("themes", DEFAULT_THEMES);
 
-export const getCurrentThemeIndex = () => currentThemeIndex;
+export const currentThemeIndex = usePersistedState("themeIndex", DEFAULT_THEME_INDEX);
+
+const currentTheme = $derived(themes.current[currentThemeIndex.current]);
+
+export const getCurrentTheme = () => currentTheme;
+
+export const handleThemeSelect = (e: Event) => {
+  const target = e.target as HTMLSelectElement;
+  currentThemeIndex.current = target.selectedIndex;
+};
 
 export const addNewTheme = (theme: Theme) => {
-  const index = themes.current.length - 1;
-  themes.current = [...themes.current, theme];
-  currentTheme.current = themes.current[index + 1];
+  themes.current.push(theme);
+  currentThemeIndex.current = themes.current.length - 1;
 };
 
 export const updateTheme = (theme: Theme) => {
-  const index = themes.current.findIndex((theme) => theme.name === currentTheme.current.name);
-  themes.current[index] = theme;
-  currentTheme.current = themes.current[index];
+  themes.current = [...themes.current.slice(0, currentThemeIndex.current), theme, ...themes.current.slice(currentThemeIndex.current + 1)];
 };
 
 export const deleteTheme = () => {
-  let index = themes.current.findIndex((theme) => theme.name === currentTheme.current.name);
-  const length = themes.current.length - 1;
-
-  if (index > length - 1) {
-    index -= 1;
+  if (themes.current.length === 1) return;
+  if (currentThemeIndex.current === themes.current.length - 1) {
+    themes.current.pop();
+    currentThemeIndex.current = themes.current.length - 1;
+  } else if (currentThemeIndex.current < themes.current.length - 1) {
+    themes.current = [...themes.current.slice(0, currentThemeIndex.current), ...themes.current.slice(currentThemeIndex.current + 1)];
   }
-
-  themes.current = themes.current.filter((theme) => theme.name !== currentTheme.current.name);
-
-  currentTheme.current = themes.current[index];
 };
 
 export const setThemeFromIndex = (index: number) => {
-  currentTheme.current = themes.current[index];
+  currentThemeIndex.current = index;
 };
 
 export const scenes = $state({ current: DEFAULT_SCENES });

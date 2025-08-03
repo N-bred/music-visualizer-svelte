@@ -70,14 +70,14 @@
   });
 
   $effect(() => {
-    isAnimationPaused.current;
-
     if (isAnimationPaused.current) {
       cancelAnimationFrame(animationFrame);
     } else {
       requestAnimationFrame(update);
     }
+  });
 
+  $effect(() => {
     orbitControls.enableRotate = enableRotation.current;
     orbitControls.enablePan = enablePan.current;
     orbitControls.enableZoom = enableZoom.current;

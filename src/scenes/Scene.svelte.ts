@@ -1,6 +1,6 @@
 import { Scene, Mesh, BoxGeometry, MeshBasicMaterial, Group } from "three";
 import { FFT_QUANTITY } from "@/store/DefaultValues.svelte";
-import { currentTheme, isTransitionRunning, currentScene, previousScene, scenePropsRequireUpdate } from "@/store/PropertiesPanel.svelte";
+import { isTransitionRunning, currentScene, previousScene, scenePropsRequireUpdate, getCurrentTheme } from "@/store/PropertiesPanel.svelte";
 import type { MeshGroup, SceneDynamicValues, SceneProperties } from "@/types";
 import sceneMap from "@/scenes/";
 import { lerpSceneProperties } from "@/utils/";
@@ -78,7 +78,7 @@ export default class CustomScene extends Scene {
   }
 
   animate(FFT: number[], delta: number) {
-    this.background = currentTheme.current.backgroundColor;
+    this.background = getCurrentTheme().backgroundColor;
     this.rotation.z -= delta;
 
     const running = this.useSceneTransition(this.transitionSpeed, this.lerpType, delta);
@@ -97,7 +97,7 @@ export default class CustomScene extends Scene {
           group.children[i].scale.z = this.dynamicValues(amp).scale[2];
         }
 
-        group.children[i].material.color.lerpColors(currentTheme.current.color, currentTheme.current.transitionColor, FFT[i] / this.maxScalar);
+        group.children[i].material.color.lerpColors(getCurrentTheme().color, getCurrentTheme().transitionColor, FFT[i] / this.maxScalar);
 
         this.maxScalar = this.maxScalar < FFT[i] ? FFT[i] : this.maxScalar;
       }

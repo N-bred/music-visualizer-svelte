@@ -2,12 +2,13 @@
   import InputWithLabel from "@/components/micro/InputWithLabel.svelte";
   import {
     themes,
-    currentTheme,
+    getCurrentTheme,
     addNewTheme,
     deleteTheme,
     updateTheme,
-    getCurrentThemeIndex,
     setThemeFromIndex,
+    handleThemeSelect,
+    currentThemeIndex,
   } from "@/store/PropertiesPanel.svelte";
   import { CSS_VARIABLE_NAMES } from "@/store/DefaultValues.svelte";
   import { updateCSSVariables } from "@/utils/";
@@ -25,7 +26,7 @@
   let backgroundColorInput = $state("");
 
   $effect(() => {
-    updateCSSVariables(currentTheme.current, CSS_VARIABLE_NAMES);
+    updateCSSVariables(getCurrentTheme(), CSS_VARIABLE_NAMES);
   });
 
   const isShowingPanel = $state({ current: false });
@@ -39,7 +40,7 @@
   function handleAddButton() {
     fillForm();
     handleShowingPanel();
-    lastThemeIndex.current = getCurrentThemeIndex();
+    lastThemeIndex.current = currentThemeIndex.current;
 
     addNewTheme({
       name: "",
@@ -48,15 +49,14 @@
       backgroundColor: new Color("#000000"),
     });
 
-    fillForm(currentTheme.current);
+    fillForm(getCurrentTheme());
     comesFromAdd.current = true;
   }
 
   function handleUpdateButton() {
     handleShowingPanel();
-    fillForm(currentTheme.current);
+    fillForm(getCurrentTheme());
     comesFromAdd.current = false;
-    currentTheme.current;
   }
 
   function handleDeleteButton() {
@@ -102,7 +102,7 @@
 <div class="themes-container">
   <div class="themes-dropdown-container {isShowingPanel.current ? 'hide' : ''}">
     <label for="themes-dropdown">Select a Theme: </label>
-    <select name="themes" bind:value={currentTheme.current}>
+    <select name="themes" value={getCurrentTheme()} onchange={handleThemeSelect}>
       {#each themes.current as theme}
         <option value={theme}>{theme.name}</option>
       {/each}
@@ -117,7 +117,7 @@
         required={true}
         bind:value={colorNameInput}
         onChange={() => {
-          currentTheme.current.name = colorNameInput;
+          getCurrentTheme().name = colorNameInput;
         }}
       />
 
@@ -128,7 +128,7 @@
         required={true}
         bind:value={initialColorInput}
         onChange={() => {
-          currentTheme.current.color = new Color(initialColorInput);
+          getCurrentTheme().color = new Color(initialColorInput);
         }}
       />
 
@@ -139,7 +139,7 @@
         required={true}
         bind:value={transitionColorInput}
         onChange={() => {
-          currentTheme.current.transitionColor = new Color(transitionColorInput);
+          getCurrentTheme().transitionColor = new Color(transitionColorInput);
         }}
       />
 
@@ -150,7 +150,7 @@
         required={true}
         bind:value={backgroundColorInput}
         onChange={() => {
-          currentTheme.current.backgroundColor = new Color(backgroundColorInput);
+          getCurrentTheme().backgroundColor = new Color(backgroundColorInput);
         }}
       />
 
