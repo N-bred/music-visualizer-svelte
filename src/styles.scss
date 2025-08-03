@@ -34,6 +34,20 @@ canvas {
   position: fixed;
 }
 
+@mixin theater-mode {
+  grid-template-areas:
+    "panel-songs canvas-container canvas-container"
+    "panel-data canvas-container canvas-container"
+    "player player player";
+  grid-template-rows: 4.5fr 5.5fr 1fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+  grid-template-columns: 29% 71%;
+
+  & .top-bar {
+    display: none;
+  }
+}
+
 .app {
   display: grid;
   background: var(--primary) url("/public/texture1.jpeg") center;
@@ -44,51 +58,32 @@ canvas {
   overflow: hidden;
   gap: 5px;
   padding: 5px;
-  grid-template-columns: minmax(15%, 2fr) 8fr minmax(15%, 2fr);
-  grid-template-rows: 0.5fr 10.5fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 9.5fr 2fr;
   grid-template-areas:
-    "panel-songs top-bar panel-data"
-    "panel-songs canvas-container panel-data"
-    "player player player";
+    "top-bar"
+    "canvas-container"
+    "player";
 
-  @media screen and (max-width: 1200px) {
-    grid-template-columns: minmax(25%, 1fr) 10fr minmax(25%, 1fr);
+  @media screen and (min-width: 768px) {
+    @include theater-mode();
   }
 
-  @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 8fr 3fr;
+  @media screen and (min-width: 1600px) {
+    grid-template-columns: minmax(15%, 2fr) 8fr minmax(15%, 2fr);
+    grid-template-rows: 0.5fr 10.5fr 1fr;
     grid-template-areas:
-      "top-bar"
-      "canvas-container"
-      "player";
-  }
-
-  &.theater {
-    grid-template-areas:
-      "panel-songs canvas-container canvas-container"
-      "panel-data canvas-container canvas-container"
+      "panel-songs top-bar panel-data"
+      "panel-songs canvas-container panel-data"
       "player player player";
-    grid-template-rows: 4.5fr 5.5fr 1fr;
-    grid-template-columns: 13% 87%;
-    transition: grid-template-rows 0.3s ease-in-out;
-
-    @media screen and (max-width: 1200px) {
-      grid-template-columns: 29% 69%;
-    }
-
-    @media screen and (max-width: 768px) {
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 8fr 3fr;
-      grid-template-areas:
-        "top-bar"
-        "canvas-container"
-        "player";
-    }
 
     & .top-bar {
-      display: none;
+      display: flex;
     }
+  }
+
+  .theater {
+    @include theater-mode();
   }
 
   .panel-songs,
@@ -153,6 +148,7 @@ canvas {
   position: relative;
   z-index: 10;
   background: var(--primary);
+  height: 100%;
 
   p {
     text-align: center;
@@ -222,19 +218,23 @@ canvas {
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   display: grid;
-  grid-template-columns: 2fr 8fr 2fr;
-  grid-template-areas:
-    ". progress-bar-container ."
-    ". buttons-menu volume-menu";
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
   place-items: center;
+  grid-template-areas:
+    "progress-bar-container"
+    "buttons-menu"
+    "volume-menu";
 
-  @media screen and (max-width: 768px) {
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
+  @media screen and (min-width: 768px) {
     grid-template-areas:
-      "progress-bar-container"
-      "buttons-menu"
-      "volume-menu";
+      ". progress-bar-container ."
+      ". buttons-menu volume-menu";
+    grid-template-columns: 2fr 7fr 3fr;
+  }
+
+  @media screen and (min-width: 1600px) {
+    grid-template-columns: 2fr 8fr 2fr;
   }
 
   .buttons-menu {
