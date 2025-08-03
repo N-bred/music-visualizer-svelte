@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
-const src = path.dirname(__dirname) + "/src/scenes";
+const src = path.dirname(__dirname) + "/src/scenes/visualizations";
+const childProcess = require("child_process");
 
 const VISUALIZATION_NAME = process.argv[2].slice(0, 1).toUpperCase() + process.argv[2].slice(1) ?? "Default";
 
@@ -56,3 +57,7 @@ export default {
   .replaceAll("[dollar-sign]", "$");
 
 fs.writeFileSync(src + `/${VISUALIZATION_NAME}.svelte.ts`, template);
+
+childProcess.exec(`cd ${path.dirname(__dirname)} && npm run gen:scenes`, (err, stdout, stderr) => {
+  if (err) throw err;
+});

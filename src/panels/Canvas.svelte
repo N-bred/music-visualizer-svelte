@@ -3,7 +3,7 @@
   import { PerspectiveCamera, Vector3, WebGLRenderer, Clock } from "three";
   import { OrbitControls } from "three/examples/jsm/Addons.js";
   import { FFT } from "@/store/State.svelte";
-  import CustomScene from "@/scenes/Scene.svelte";
+  import MultiMeshScene from "@/scenes/MultiMeshScene.svelte";
   import { isAnimationPaused, enableRotation, enablePan, enableZoom } from "@/store/PropertiesPanel.svelte";
   import { handleFullScreen, handleTheatherMode, isFullscreen, isTheaterMode, stats } from "@/store/CanvasPanel.svelte";
 
@@ -36,7 +36,7 @@
     camera.position.set(0, 0, 1000);
     orbitControls.update();
 
-    const scene = new CustomScene(0.3, "easeOutSine");
+    const scene = new MultiMeshScene(0.3, "easeOutSine");
     const clock = new Clock();
 
     update = () => {
