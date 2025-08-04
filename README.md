@@ -1,47 +1,67 @@
-# Svelte + TS + Vite
+# 🎵 Svelte + Three JS Song Visualizer - V.1
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+Welcome to the **Three JS Song Visualizer (with Svelte)**, a dynamic and theme-driven audio visualization project now entering its **Version 1** milestone. This initial phase introduces foundational functionality focused on delivering a visually engaging experience while maintaining responsive keyboard interaction and support for customized aesthetic themes.
 
-## Recommended IDE Setup
+The visualizer is designed to work in sync with audio playback, allowing users to manipulate the playback and animation with precision, thanks to an intuitive keyboard command system.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+---
 
-## Need an official Svelte framework?
+## 🚀 Features
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+- Real-time audio visualization
+- Theme support with user-defined color palettes
+- Fullscreen and theater display modes
+- Play, pause, next song & previous song buttons
+- Volume range
+- Animation control (more coming in V.2!)
+- FPS counter
+- Persisted settings across sessions (via local storage)
 
-## Technical considerations
+---
 
-**Why use this over SvelteKit?**
+## 🎹 Keyboard Shortcuts
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+> These shortcuts only trigger when **Ctrl + Alt + Meta (Command/Windows)** are held.
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+| Key                      | Action Description                    |
+| ------------------------ | ------------------------------------- |
+| `Ctrl + Alt + ⌘ + S`     | Toggle FPS counter display            |
+| `Ctrl + Alt + ⌘ + ↑`     | Previous track                        |
+| `Ctrl + Alt + ⌘ + ↓`     | Next track                            |
+| `Ctrl + Alt + ⌘ + ←`     | Previous track                        |
+| `Ctrl + Alt + ⌘ + →`     | Next track                            |
+| `Ctrl + Alt + ⌘ + P`     | Toggle play/pause of audio            |
+| `Ctrl + Alt + ⌘ + Space` | Toggle play/pause of audio            |
+| `Ctrl + Alt + ⌘ + ]`     | Toggle play/pause of the animation    |
+| `Ctrl + Alt + ⌘ + O`     | Toggle play/pause of the animation    |
+| `Ctrl + Alt + ⌘ + K`     | Pause animation and pause music       |
+| `Ctrl + Alt + ⌘ + L`     | Play animation and resume music       |
+| `Ctrl + Alt + ⌘ + F`     | Toggle fullscreen mode                |
+| `Ctrl + Alt + ⌘ + T`     | Toggle theater mode                   |
+| `Ctrl + Alt + ⌘ + N`     | Previous Theme                        |
+| `Ctrl + Alt + ⌘ + M`     | Next Theme                            |
+| `Ctrl + Alt + ⌘ + H`     | Previous Scene                        |
+| `Ctrl + Alt + ⌘ + J`     | Next Scene                            |
+| `Ctrl + Alt + ⌘ + ;`     | Previous Theme                        |
+| `Ctrl + Alt + ⌘ + '`     | Next Theme                            |
+| `Ctrl + Alt + ⌘ + ,`     | Previous Scene                        |
+| `Ctrl + Alt + ⌘ + .`     | Next Scene                            |
+---
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+## 🖌 Theme Support
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+The visualizer supports **custom themes**, allowing users to personalize their viewing experience. These themes influence the color palette of the visualization, including elements like bars, background, and color transitions. Themes are saved and persisted across sessions.
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+---
 
-**Why include `.vscode/extensions.json`?**
+## 📦 Version Info
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+- **Version**: 1.0.0
+- **Status**: First phase released
+- **Upcoming**: Shader support, more prefabricated scenes, deeper customization for scene properties.
 
-**Why enable `allowJs` in the TS template?**
+---
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+Stay tuned for updates and enhancements as I continue to evolve this visual experience.
 
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+And thank you for your attention!
