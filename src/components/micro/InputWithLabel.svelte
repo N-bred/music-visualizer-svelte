@@ -4,6 +4,7 @@
     name,
     min = null,
     max = null,
+    step = null,
     placeholder = "",
     required,
     type,
@@ -14,4 +15,4 @@
 </script>
 
 <label for={name + "input"}>{labelContent}</label>
-<input {type} {name} id={name + "input"} {placeholder} {required} {accept} bind:value onchange={(e) => onChange(e)} {min} {max} />
+<input {type} {name} id={name + "input"} {placeholder} {required} {accept} bind:value onchange={(e) => onChange(e)} {min} {max} {step}/>

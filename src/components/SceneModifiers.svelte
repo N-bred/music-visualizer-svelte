@@ -21,6 +21,8 @@
     type={modifiers[key].type}
     labelContent={modifiers[key].label}
     min={modifiers[key].min}
+    max={modifiers[key].max}
     onChange={(e: Event) => onChange(e, key)}
+    step={modifiers[key].step}
   />
 {/each}

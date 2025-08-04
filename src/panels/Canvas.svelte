@@ -74,6 +74,7 @@
     const handleFullScreenEvent = () => {
       const condition = !!(document.fullscreenElement ?? false);
       isFullscreen.current = condition;
+      window.dispatchEvent(new Event('resize'));
     };
 
     document.addEventListener("fullscreenchange", handleFullScreenEvent);

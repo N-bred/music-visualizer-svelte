@@ -92,9 +92,9 @@ export default class CustomScene extends Scene {
         }
 
         if (this.dynamicValues) {
-          group.children[i].scale.x = this.dynamicValues(amp).scale[0];
-          group.children[i].scale.y = this.dynamicValues(amp).scale[1];
-          group.children[i].scale.z = this.dynamicValues(amp).scale[2];
+          group.children[i].scale.x = this.dynamicValues(amp, i).scale[0];
+          group.children[i].scale.y = this.dynamicValues(amp, i).scale[1];
+          group.children[i].scale.z = this.dynamicValues(amp, i).scale[2];
         }
 
         group.children[i].material.color.lerpColors(getCurrentTheme().color, getCurrentTheme().transitionColor, FFT[i] / this.maxScalar);

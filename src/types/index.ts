@@ -1,4 +1,4 @@
-import type { DEFAULT_SCENES } from "@/store/DefaultValues.svelte";
+import type { DEFAULT_SCENES } from "@/scenes/index.svelte";
 import type { Color, Group, Mesh, BoxGeometry, MeshBasicMaterial, Object3DEventMap } from "three";
 
 type HTMLInputTypes =
@@ -104,7 +104,7 @@ export type SceneName = SceneNames[number];
 export type Vector3Return = [x: number, y: number, z: number];
 export type SceneProperties = { position: Vector3Return; rotation: Vector3Return }[];
 
-export type SceneDynamicValues = (amplitude: number) => { scale: Vector3Return };
+export type SceneDynamicValues = (amplitude: number, i?: number) => { scale: Vector3Return };
 
 export type SceneModifier = {
   set: (newValue: any) => any;
@@ -112,6 +112,8 @@ export type SceneModifier = {
   type: string;
   label: string;
   min?: number;
+  max?: number;
+  step?: number;
 };
 
 export type SceneExport = {
