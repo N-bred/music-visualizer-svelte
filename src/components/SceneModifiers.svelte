@@ -3,7 +3,7 @@
   import InputWithLabel from "./micro/InputWithLabel.svelte";
   import sceneMap from "@/scenes/index.svelte";
 
-  let modifiers = $derived(sceneMap[currentScene.current].modifiers);
+  let modifiers = $derived(sceneMap[currentScene()].modifiers);
 
   function onChange(e: Event, key: string) {
     const target = e.target as HTMLInputElement;

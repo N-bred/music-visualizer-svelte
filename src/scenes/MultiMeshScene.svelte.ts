@@ -17,7 +17,7 @@ export default class CustomScene extends Scene {
 
   initialSceneProperties = $derived(sceneMap[previousScene.current].precalculateValues());
 
-  targetSceneProperties = $derived(sceneMap[currentScene.current].precalculateValues());
+  targetSceneProperties = $derived(sceneMap[currentScene()].precalculateValues());
 
   finalSceneProperties = $derived(sceneMap[previousScene.current].precalculateValues());
 
@@ -70,7 +70,7 @@ export default class CustomScene extends Scene {
       } else {
         isTransitionRunning.current = false;
         this.transitionTimer = 0;
-        previousScene.current = currentScene.current;
+        previousScene.current = currentScene();
         return false;
       }
     }

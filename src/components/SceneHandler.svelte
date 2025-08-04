@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { scenes, currentScene, isTransitionRunning } from "@/store/PropertiesPanel.svelte";
+  import { scenes, currentScene, isTransitionRunning, handleSceneSelect } from "@/store/PropertiesPanel.svelte";
   import SceneModifiers from "./SceneModifiers.svelte";
 
   let showingModifiers = $state(false);
@@ -16,14 +16,7 @@
 <div class="scenes-container">
   <div class="scenes-dropdown-container {showingModifiers ? 'hide' : ''}">
     <label for="scenes-dropdown">Select a Scene: </label>
-    <select
-      name="scenes"
-      bind:value={currentScene.current}
-      disabled={isTransitionRunning.current}
-      onchange={() => {
-        isTransitionRunning.current = true;
-      }}
-    >
+    <select name="scenes" value={currentScene()} disabled={isTransitionRunning.current} onchange={handleSceneSelect}>
       {#each scenes.current as scene}
         <option value={scene}>{scene}</option>
       {/each}

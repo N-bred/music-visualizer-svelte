@@ -79,25 +79,35 @@ export const handleNextTheme = () => {
 
 export const scenes = $state({ current: DEFAULT_SCENES });
 
-export const currentScene: { current: SceneName } = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
+export const currentSceneIndex = usePersistedState("sceneIndex", DEFAULT_SCENE_INDEX);
 
-export const previousScene: { current: SceneName } = $state({ current: scenes.current[DEFAULT_SCENE_INDEX] });
+const derivedCurrentScene = $derived(scenes.current[currentSceneIndex.current]);
+
+export const currentScene = () => derivedCurrentScene;
+
+export const handleSceneSelect = (e: Event) => {
+  const target = e.target as HTMLSelectElement;
+  currentSceneIndex.current = target.selectedIndex;
+  isTransitionRunning.current = true;
+};
+
+export const previousScene: { current: SceneName } = $state({ current: scenes.current[currentSceneIndex.current] });
 
 export const isTransitionRunning = $state({ current: false });
 export const scenePropsRequireUpdate = $state({ current: false });
 
 export const handleNextScene = () => {
   if (isTransitionRunning.current) return;
-  const nextScene = scenes.current.findIndex((scene) => scene === currentScene.current) + 1;
+  const nextScene = currentSceneIndex.current + 1;
   if (nextScene > scenes.current.length - 1) return;
-  currentScene.current = scenes.current[nextScene];
+  currentSceneIndex.current = nextScene;
   isTransitionRunning.current = true;
 };
 
 export const handlePreviousScene = () => {
   if (isTransitionRunning.current) return;
-  const nextScene = scenes.current.findIndex((scene) => scene === currentScene.current) - 1;
+  const nextScene = currentSceneIndex.current - 1;
   if (nextScene < 0) return;
-  currentScene.current = scenes.current[nextScene];
+  currentSceneIndex.current = nextScene;
   isTransitionRunning.current = true;
 };
