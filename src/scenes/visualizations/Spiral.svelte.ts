@@ -1,4 +1,3 @@
-import { MathUtils } from "three";
 import { FFT_QUANTITY } from "@/store/DefaultValues.svelte";
 import type { SceneDynamicValues, SceneExport, SceneModifier, SceneProperties, Vector3Return } from "@/types";
 import { useLocalStorage } from "@/utils/localStorage";
@@ -26,7 +25,6 @@ const modifiers = $state<Record<string, SceneModifier>>({
 });
 
 const dynamicValues: SceneDynamicValues = (amplitude: number, i?: number) => {
-  const val = (i ?? 0) / FFT_QUANTITY;
   return {
     scale: [1, 1, Math.max(amplitude, 1)],
   };

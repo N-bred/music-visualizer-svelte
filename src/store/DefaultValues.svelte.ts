@@ -56,7 +56,7 @@ export const DEFAULT_THEMES: Theme[] = [
 ];
 
 export const DEFAULT_THEME_INDEX = 0;
-export const DEFAULT_ANIMATION_PAUSED = true;
+export const DEFAULT_ANIMATION_PAUSED = false
 export const DEFAULT_ROTATION_ENABLED = true;
 export const DEFAULT_PAN_ENABLED = true;
 export const DEFAULT_ZOOM_ENABLED = true;
