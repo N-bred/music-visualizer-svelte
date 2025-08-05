@@ -3,17 +3,17 @@
   import InputWithLabel from "./micro/InputWithLabel.svelte";
   import sceneMap from "@/scenes/index.svelte";
 
-  let modifiers = $derived(sceneMap[currentScene()].modifiers);
+  // let modifiers = $derived(sceneMap[currentScene()].modifiers);
 
-  function onChange(e: Event, key: string) {
-    const target = e.target as HTMLInputElement;
-    const newValue = parseFloat(target.value);
-    modifiers[key].set(newValue);
-    scenePropsRequireUpdate.current = true;
-  }
+  // function onChange(e: Event, key: string) {
+  //   const target = e.target as HTMLInputElement;
+  //   const newValue = parseFloat(target.value);
+  //   modifiers[key].set(newValue);
+  //   scenePropsRequireUpdate.current = true;
+  // }
 </script>
 
-{#each Object.keys(modifiers) as key}
+<!-- {#each Object.keys(modifiers) as key}
   <InputWithLabel
     bind:value={modifiers[key].value}
     name={key}
@@ -25,4 +25,4 @@
     onChange={(e: Event) => onChange(e, key)}
     step={modifiers[key].step}
   />
-{/each}
+{/each} -->

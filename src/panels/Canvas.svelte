@@ -4,6 +4,7 @@
   import { OrbitControls } from "three/examples/jsm/Addons.js";
   import { FFT } from "@/store/State.svelte";
   import MultiMeshScene from "@/scenes/MultiMeshScene.svelte";
+  import ShaderScene from "@/scenes/ShaderScene.svelte";
   import { isAnimationPaused, enableRotation, enablePan, enableZoom } from "@/store/PropertiesPanel.svelte";
   import { handleFullScreen, handleTheatherMode, isFullscreen, isTheaterMode, stats } from "@/store/CanvasPanel.svelte";
 
@@ -36,7 +37,8 @@
     camera.position.set(0, 0, 1000);
     orbitControls.update();
 
-    const scene = new MultiMeshScene(0.3, "easeOutSine");
+    const scene = new ShaderScene(0.3, "easeOutSine");
+    // const scene = new MultiMeshScene(0.3, "easeOutSine");
     const clock = new Clock();
 
     update = () => {
@@ -74,7 +76,7 @@
     const handleFullScreenEvent = () => {
       const condition = !!(document.fullscreenElement ?? false);
       isFullscreen.current = condition;
-      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event("resize"));
     };
 
     document.addEventListener("fullscreenchange", handleFullScreenEvent);

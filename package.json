@@ -19,7 +19,8 @@
     "svelte": "^5.35.5",
     "svelte-check": "^4.2.2",
     "typescript": "~5.8.3",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vite-plugin-glsl": "^1.5.1"
   },
   "dependencies": {
     "@types/three": "^0.178.1",
