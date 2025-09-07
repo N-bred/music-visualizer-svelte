@@ -261,11 +261,10 @@ canvas {
       align-items: center;
       background: var(--button-color);
       color: var(--primary);
-      padding: 20px;
       margin: 0 15px;
-      aspect-ratio: 4/3;
       font-size: 18px;
-      min-width: 15.5px;
+      width: 55px;
+      height: 55px;
 
       &:hover {
         background: var(--button-hover-color);
