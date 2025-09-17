@@ -12,7 +12,7 @@ An improved experience of the visualizer just came out, now with online song sea
 
 Now, when you download the latest release, you will find a new search song button in the songs panel, this should allow you to look for your songs online without need of a local song file or the need to download anything, just pure streaming
 
-Check it out: github.com/N-bred/music-visualizer-svelte/releases/tag/v1.0.0
+Check it out: [Releases](https://github.com/N-bred/music-visualizer-svelte/releases/tag/v1.0.0)
 
 NOTE: docker desktop is required to run the image. (But you can also just install the dependencies with npm or similar and run it without docker)
 
