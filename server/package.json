@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
+    "youtube-search-api": "^2.0.1",
     "ytdl-core": "npm:@distube/ytdl-core@^4.16.12"
   }
 }

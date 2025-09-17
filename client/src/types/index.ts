@@ -131,3 +131,15 @@ export type createAndAddSongType = {
   songFile?: File;
   src?: string;
 };
+
+export type Thumbnail = {
+  url: string;
+  height: number;
+  width: number;
+};
+
+export type YoutubeResult = {
+  id: string;
+  title: string;
+  thumbnails: Thumbnail[];
+};

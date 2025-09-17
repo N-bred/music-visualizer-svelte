@@ -10,7 +10,7 @@
 </script>
 
 <div class="panel-songs">
-  <Button type="submit" onClick={handleIsSearchingSongs}>Search Songs</Button>
+  <Button type="submit" onClick={handleIsSearchingSongs}>{isSearchingSongs ?  "Upload Songs" : "Search Songs"}</Button>
 
   <div class="song-list-container">
     <h3>ALL SONGS</h3>
