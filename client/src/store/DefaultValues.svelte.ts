@@ -21,7 +21,7 @@ export const FFT_QUANTITY = FFT_SIZE / 2;
 export const SONGS_FOLDER = "/songs/";
 export let DEFAULT_SONGS: Song[] = [];
 
-// if (MODE === DEVELOPMENT) {
+if (MODE === DEVELOPMENT) {
   DEFAULT_SONGS = [
     {
       id: randomID("System of a Down", "Forest"),
@@ -36,7 +36,7 @@ export let DEFAULT_SONGS: Song[] = [];
       fileName: "Clavicula Nox.mp3",
     },
   ];
-// }
+}
 
 export const DEFAULT_VOLUME = 1;
 
@@ -56,7 +56,7 @@ export const DEFAULT_THEMES: Theme[] = [
 ];
 
 export const DEFAULT_THEME_INDEX = 0;
-export const DEFAULT_ANIMATION_PAUSED = false
+export const DEFAULT_ANIMATION_PAUSED = false;
 export const DEFAULT_ROTATION_ENABLED = true;
 export const DEFAULT_PAN_ENABLED = true;
 export const DEFAULT_ZOOM_ENABLED = true;

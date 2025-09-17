@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+ENV ENVIRONS='web-local'
+
 RUN npm run build
 
 EXPOSE 3000

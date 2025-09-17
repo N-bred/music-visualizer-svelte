@@ -4,7 +4,19 @@ import path from "path";
 
 export default ({ mode }: { mode: string }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  const base = mode === "development" ? "/" : "/";
+  const ENVIRONS = process.env.ENVIRONS;
+
+  let base = "/";
+
+  if (mode === "production") {
+    if (ENVIRONS === "web-local") {
+      console.log(process.env);
+      base = "/";
+    } else {
+      base = "/music-visualizer-svelte";
+    }
+  }
+
   return defineConfig({
     resolve: {
       alias: {
