@@ -5,7 +5,8 @@
   import { handleFullScreen, handleTheatherMode, handleFPSCounter } from "@/store/CanvasPanel.svelte";
 
   window.addEventListener("keyup", (e) => {
-    if (e.ctrlKey && e.altKey && e.metaKey) {
+    e.preventDefault();
+    if (e.ctrlKey && e.shiftKey) {
       switch (e.code) {
         case "KeyS":
           handleFPSCounter();
