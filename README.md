@@ -6,6 +6,16 @@ The visualizer is designed to work in sync with audio playback, allowing users t
 
 ---
 
+## NEW RELEASE (17/09/2025):
+
+An improved experience of the visualizer just came out, now with online song search functionality!
+
+Now, when you download the latest release, you will find a new search song button in the songs panel, this should allow you to look for your songs online without need of a local song file or the need to download anything, just pure streaming
+
+Check it out: github.com/N-bred/music-visualizer-svelte/releases/tag/v1.0.0
+
+NOTE: docker desktop is required to run the image. (But you can also just install the dependencies with npm or similar and run it without docker)
+
 ## 🚀 Features
 
 - Real-time audio visualization
@@ -13,9 +23,9 @@ The visualizer is designed to work in sync with audio playback, allowing users t
 - Fullscreen and theater display modes
 - Play, pause, next song & previous song buttons
 - Volume range
-- Animation control (more coming in V.2!)
 - FPS counter
 - Persisted settings across sessions (via local storage)
+- Release supporting online song search!
 
 ---
 
@@ -25,27 +35,27 @@ The visualizer is designed to work in sync with audio playback, allowing users t
 
 | Key                      | Action Description                    |
 | ------------------------ | ------------------------------------- |
-| `Ctrl + Alt + ⌘ + S`     | Toggle FPS counter display            |
-| `Ctrl + Alt + ⌘ + ↑`     | Previous track                        |
-| `Ctrl + Alt + ⌘ + ↓`     | Next track                            |
-| `Ctrl + Alt + ⌘ + ←`     | Previous track                        |
-| `Ctrl + Alt + ⌘ + →`     | Next track                            |
-| `Ctrl + Alt + ⌘ + P`     | Toggle play/pause of audio            |
-| `Ctrl + Alt + ⌘ + Space` | Toggle play/pause of audio            |
-| `Ctrl + Alt + ⌘ + ]`     | Toggle play/pause of the animation    |
-| `Ctrl + Alt + ⌘ + O`     | Toggle play/pause of the animation    |
-| `Ctrl + Alt + ⌘ + K`     | Pause animation and pause music       |
-| `Ctrl + Alt + ⌘ + L`     | Play animation and resume music       |
-| `Ctrl + Alt + ⌘ + F`     | Toggle fullscreen mode                |
-| `Ctrl + Alt + ⌘ + T`     | Toggle theater mode                   |
-| `Ctrl + Alt + ⌘ + N`     | Previous Theme                        |
-| `Ctrl + Alt + ⌘ + M`     | Next Theme                            |
-| `Ctrl + Alt + ⌘ + H`     | Previous Scene                        |
-| `Ctrl + Alt + ⌘ + J`     | Next Scene                            |
-| `Ctrl + Alt + ⌘ + ;`     | Previous Theme                        |
-| `Ctrl + Alt + ⌘ + '`     | Next Theme                            |
-| `Ctrl + Alt + ⌘ + ,`     | Previous Scene                        |
-| `Ctrl + Alt + ⌘ + .`     | Next Scene                            |
+| `Ctrl + Shift + S`     | Toggle FPS counter display            |
+| `Ctrl + Shift + ↑`     | Previous track                        |
+| `Ctrl + Shift + ↓`     | Next track                            |
+| `Ctrl + Shift + ←`     | Previous track                        |
+| `Ctrl + Shift + →`     | Next track                            |
+| `Ctrl + Shift + P`     | Toggle play/pause of audio            |
+| `Ctrl + Shift + Space` | Toggle play/pause of audio            |
+| `Ctrl + Shift + ]`     | Toggle play/pause of the animation    |
+| `Ctrl + Shift + O`     | Toggle play/pause of the animation    |
+| `Ctrl + Shift + K`     | Pause animation and pause music       |
+| `Ctrl + Shift + L`     | Play animation and resume music       |
+| `Ctrl + Shift + F`     | Toggle fullscreen mode                |
+| `Ctrl + Shift + T`     | Toggle theater mode                   |
+| `Ctrl + Shift + N`     | Previous Theme                        |
+| `Ctrl + Shift + M`     | Next Theme                            |
+| `Ctrl + Shift + H`     | Previous Scene                        |
+| `Ctrl + Shift + J`     | Next Scene                            |
+| `Ctrl + Shift + ;`     | Previous Theme                        |
+| `Ctrl + Shift + '`     | Next Theme                            |
+| `Ctrl + Shift + ,`     | Previous Scene                        |
+| `Ctrl + Shift + .`     | Next Scene                            |
 ---
 
 ## 🖌 Theme Support
