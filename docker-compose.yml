@@ -3,3 +3,7 @@ services:
     build: ./client
     ports:
       - "3000:3000"
+  server:
+    build: ./server
+    ports:
+      - "3001:3001"
