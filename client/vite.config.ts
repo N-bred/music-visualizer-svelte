@@ -10,7 +10,6 @@ export default ({ mode }: { mode: string }) => {
 
   if (mode === "production") {
     if (ENVIRONS === "web-local") {
-      console.log(process.env);
       base = "/";
     } else {
       base = "/music-visualizer-svelte";
@@ -18,6 +17,9 @@ export default ({ mode }: { mode: string }) => {
   }
 
   return defineConfig({
+    define: {
+      __ENVIRONS__: JSON.stringify(ENVIRONS || "web"),
+    },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),

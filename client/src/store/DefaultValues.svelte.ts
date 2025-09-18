@@ -4,7 +4,6 @@ import { Color } from "three";
 
 const MODE = import.meta.env.MODE;
 const DEVELOPMENT = "development";
-const PRODUCTION = "production";
 
 export const CSS_VARIABLE_NAMES = [
   {
@@ -21,7 +20,7 @@ export const FFT_QUANTITY = FFT_SIZE / 2;
 export const SONGS_FOLDER = "/songs/";
 export let DEFAULT_SONGS: Song[] = [];
 
-if (MODE === DEVELOPMENT) {
+if (MODE === DEVELOPMENT || __ENVIRONS__ === 'web-local') {
   DEFAULT_SONGS = [
     {
       id: randomID("System of a Down", "Forest"),
