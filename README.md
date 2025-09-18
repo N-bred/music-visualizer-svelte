@@ -14,7 +14,7 @@ Now, when you download the latest release, you will find a new search song butto
 
 Check it out: [Releases](https://github.com/N-bred/music-visualizer-svelte/releases/tag/v1.0.0)
 
-NOTE: docker desktop is required to run the image. (But you can also just install the dependencies with npm or similar and run it without docker)
+Note: You can either run the app by using docker and docker compose, or run it by executing a "npm start" command on the root folder, granted you have node on your system.
 
 ## 🚀 Features
 
@@ -26,6 +26,7 @@ NOTE: docker desktop is required to run the image. (But you can also just instal
 - FPS counter
 - Persisted settings across sessions (via local storage)
 - Release supporting online song search!
+- "Load songs directly from your filesystem (server/src/songs)."
 
 ---
 

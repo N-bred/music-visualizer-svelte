@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "confg": "npm i && npm i --prefix client && npm i --prefix server",
+    "start": "npm run confg && concurrently \"npm run server\" \"npm run client\"",
     "simulate": "concurrently \"npm run server\" \"npm run clientWeb\"",
     "client": "ENVIRONS=\"web-local\" npm run build --prefix client && ENVIRONS=\"web-local\" npm run serve --prefix client",
     "clientWeb": "npm run build --prefix client &&  npm run serve --prefix client",
