@@ -1,8 +1,18 @@
 import type { Song } from "@/types";
-import { createSongList } from "@/utils/";
-import { DEFAULT_SONGS, SONGS_FOLDER } from "./DefaultValues.svelte";
+import { GET_DEFAULT_SONGS } from "./DefaultValues.svelte";
 
-export const songList: { current: Song[] } = $state({ current: createSongList(DEFAULT_SONGS, SONGS_FOLDER) });
+export const songList: { current: Song[] } = $state({ current: [] });
+
+const MODE = import.meta.env.MODE;
+const DEVELOPMENT = "development";
+
+if (MODE === DEVELOPMENT || __ENVIRONS__ === "web-local") {
+  GET_DEFAULT_SONGS()
+    .then((songs) => {
+      songList.current = songs;
+    })
+    .catch(console.error);
+}
 
 export const songCurrentIndex = $state({ current: 0 });
 

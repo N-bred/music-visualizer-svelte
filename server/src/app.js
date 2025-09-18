@@ -1,11 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const { parseFile } = require("music-metadata");
+const { inspect } = require("node:util");
+const fs = require("fs");
+const path = require("path");
 const ytdl = require("ytdl-core");
 const ytapi = require("youtube-search-api");
 const app = express();
 const PORT = 3001;
 
 const allowedOrigins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:4173"];
+
+function randomID(artistName, songName) {
+  return artistName + " " + songName;
+}
 
 app.use(
   cors({
@@ -14,7 +22,32 @@ app.use(
   })
 );
 
+app.use("/songs", express.static(path.join(__dirname, "songs")));
+
 app.use(express.json());
+
+app.get("/api/localSongs", async (req, res) => {
+  const songs = fs.readdirSync(path.join(__dirname, "songs"));
+  const metadata = songs
+    .map((song) => path.join(__dirname, "songs", song))
+    .map(async (songPath, i) => {
+      try {
+        const { artist, title } = (await parseFile(songPath)).common;
+        const src = new URL(path.join(`http://localhost:${PORT}`, "songs", songs[i]));
+        return {
+          id: randomID(artist, title),
+          artistName: artist,
+          songName: title,
+          fileName: title + songPath.slice(songPath.indexOf(".")),
+          src,
+        };
+      } catch (error) {
+        console.error("Error parsing metadata:", error.message);
+      }
+    });
+
+  res.json({ songs: await Promise.all(metadata) });
+});
 
 app.post("/api/searchSongs", async (req, res) => {
   const { artistName, songName } = req.body;

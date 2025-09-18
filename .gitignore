@@ -24,10 +24,20 @@ dist-ssr
 *.sw?
 
 #Font Awesome
-/src/vendor/font-awesome-4.7.0/less
-/src/vendor/font-awesome-4.7.0/scss
-/src/vendor/font-awesome-4.7.0/HELP-US-OUT.txt
+client/src/vendor/font-awesome-4.7.0/less
+client/src/vendor/font-awesome-4.7.0/scss
+client/src/vendor/font-awesome-4.7.0/HELP-US-OUT.txt
+
 #SONGS
-/public/songs/*
+*.mp3
+*.mp4
+*.aac
+*.m4a
+*.flac
+*.flac
+*.ogg
+*.wma
+*.wav
+
 #TODOS
 /TODOS.md
