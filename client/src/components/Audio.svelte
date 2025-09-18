@@ -42,4 +42,5 @@
   bind:paused={isPaused.current}
   volume={volume.current}
   bind:currentTime={currentTime.current}
+  crossorigin="anonymous"
 ></audio>

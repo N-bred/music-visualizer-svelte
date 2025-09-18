@@ -498,6 +498,44 @@ form {
   }
 }
 
+.youtube-previewer {
+  margin-bottom: 2.5rem;
+}
+
+.youtube-preview {
+  all: unset;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 1px 3px var(--accent-color);
+  }
+
+  &-image-container {
+    width: 50%;
+    min-width: 110px;
+    max-width: 110px;
+    min-height: 56px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-title-container {
+    padding-left: 1rem;
+    p {
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
 .hidden {
   display: none;
 }

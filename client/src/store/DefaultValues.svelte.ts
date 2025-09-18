@@ -1,10 +1,5 @@
-import type { Song, Theme } from "@/types";
-import { randomID } from "@/utils/";
+import type { Theme } from "@/types";
 import { Color } from "three";
-
-const MODE = import.meta.env.MODE;
-const DEVELOPMENT = "development";
-const PRODUCTION = "production";
 
 export const CSS_VARIABLE_NAMES = [
   {
@@ -18,25 +13,11 @@ export const CSS_VARIABLE_NAMES = [
 export const FFT_SIZE = 2048;
 export const FFT_QUANTITY = FFT_SIZE / 2;
 
-export const SONGS_FOLDER = "/public/songs/";
-export let DEFAULT_SONGS: Song[] = [];
-
-if (MODE === DEVELOPMENT) {
-  DEFAULT_SONGS = [
-    {
-      id: randomID("System of a Down", "Forest"),
-      artistName: "System of a Down",
-      songName: "Forest",
-      fileName: "Forest.mp3",
-    },
-    {
-      id: randomID("Therion", "Clavicula Nox"),
-      artistName: "Therion",
-      songName: "Clavicula Nox",
-      fileName: "Clavicula Nox.mp3",
-    },
-  ];
-}
+export const GET_DEFAULT_SONGS = async () => {
+  const req = await fetch("http://localhost:3001/api/localSongs");
+  const { songs } = await req.json();
+  return songs;
+};
 
 export const DEFAULT_VOLUME = 1;
 
@@ -56,7 +37,7 @@ export const DEFAULT_THEMES: Theme[] = [
 ];
 
 export const DEFAULT_THEME_INDEX = 0;
-export const DEFAULT_ANIMATION_PAUSED = false
+export const DEFAULT_ANIMATION_PAUSED = false;
 export const DEFAULT_ROTATION_ENABLED = true;
 export const DEFAULT_PAN_ENABLED = true;
 export const DEFAULT_ZOOM_ENABLED = true;

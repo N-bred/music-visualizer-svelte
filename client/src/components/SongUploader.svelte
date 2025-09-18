@@ -1,10 +1,7 @@
 <script lang="ts">
-  import type { Song } from "@/types";
-  import { randomID } from "@/utils/";
-  import { songList, addSong } from "@/store/SongsPanel.svelte";
-  import SongList from "@/components/micro/SongList.svelte";
   import InputWithLabel from "@/components/micro/InputWithLabel.svelte";
   import Button from "@/components/micro/Button.svelte";
+  import { createAndAddSong } from "@/utils";
 
   const ARTIST_NAME_INPUT = "artistName";
   const SONG_NAME_INPUT = "songName";
@@ -20,26 +17,22 @@
     const songName = formData.get(SONG_NAME_INPUT) as string;
     const songFile = formData.get(SONG_FILE_INPUT) as File;
 
-    const newSong: Song = {
-      id: randomID(artistName, songName),
-      artistName: artistName,
-      fileName: songFile.name,
-      songName: songName,
-      src: URL.createObjectURL(songFile),
-    };
+    try {
+      createAndAddSong({
+        artistName,
+        songName,
+        songFile,
+      });
+    } catch (err) {
+      console.error(err);
+    }
 
-    addSong(newSong);
     (e.target as HTMLFormElement).reset();
     handleShowingUploadPanel();
   };
 </script>
 
-<div class="panel-songs">
-  <div class="song-list-container">
-    <h3>ALL SONGS</h3>
-    <span class="divider"></span>
-    <SongList songs={songList.current} />
-  </div>
+<div>
   <div class="song-upload-container {showingUploadPanel.current ? '' : 'hide'}">
     <form onsubmit={handleFormSubmit}>
       <InputWithLabel labelContent="Artist name" placeholder="Please enter the artist name" name={ARTIST_NAME_INPUT} required={true} type="text" />
@@ -51,6 +44,7 @@
       <Button type="submit">Upload Song</Button>
     </form>
   </div>
+
   <Button onClick={handleShowingUploadPanel}>
     {showingUploadPanel.current ? "Show all Songs" : "Upload a song"}
   </Button>

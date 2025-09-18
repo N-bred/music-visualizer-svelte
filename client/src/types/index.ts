@@ -124,3 +124,22 @@ export type SceneExport = {
 
 export type SceneMap = Record<SceneName, SceneExport>;
 export type MeshGroup = Group & { children: Mesh<BoxGeometry, MeshBasicMaterial, Object3DEventMap>[] };
+
+export type createAndAddSongType = {
+  artistName: string;
+  songName: string;
+  songFile?: File;
+  src?: string;
+};
+
+export type Thumbnail = {
+  url: string;
+  height: number;
+  width: number;
+};
+
+export type YoutubeResult = {
+  id: string;
+  title: string;
+  thumbnails: Thumbnail[];
+};
