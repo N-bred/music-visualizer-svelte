@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "client": "ENVIRONS=\"web-local\" npm run build --prefix client && npm run serve --prefix client",
+    "simulate": "concurrently \"npm run server\" \"npm run clientWeb\"",
+    "client": "ENVIRONS=\"web-local\" npm run build --prefix client && ENVIRONS=\"web-local\" npm run serve --prefix client",
+    "clientWeb": "npm run build --prefix client &&  npm run serve --prefix client",
     "server": "npm run start --prefix server"
   },
   "keywords": [],

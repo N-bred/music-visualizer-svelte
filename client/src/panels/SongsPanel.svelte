@@ -10,7 +10,9 @@
 </script>
 
 <div class="panel-songs">
-  <Button type="submit" onClick={handleIsSearchingSongs}>{isSearchingSongs ?  "Upload Songs" : "Search Songs"}</Button>
+  {#if import.meta.env.MODE === "development" || __ENVIRONS__ === "web-local"}
+    <Button type="submit" onClick={handleIsSearchingSongs}>{isSearchingSongs ? "Upload Songs" : "Search Songs"}</Button>
+  {/if}
 
   <div class="song-list-container">
     <h3>ALL SONGS</h3>
