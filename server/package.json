@@ -18,6 +18,7 @@
     "music-metadata": "^11.9.0",
     "nodemon": "^3.1.10",
     "youtube-search-api": "^2.0.1",
+    "youtubei.js": "^16.0.1",
     "ytdl-core": "npm:@distube/ytdl-core@^4.16.12"
   }
 }

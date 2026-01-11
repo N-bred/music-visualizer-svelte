@@ -3,11 +3,28 @@ const cors = require("cors");
 const { parseFile } = require("music-metadata");
 const { inspect } = require("node:util");
 const fs = require("fs");
+const { Innertube, UniversalCache, Utils, Platform } = require("youtubei.js");
 const path = require("path");
 const ytdl = require("ytdl-core");
 const ytapi = require("youtube-search-api");
 const app = express();
 const PORT = 3001;
+
+Platform.shim.eval = async (data, env) => {
+  const properties = [];
+
+  if (env.n) {
+    properties.push(`n: exportedVars.nFunction("${env.n}")`);
+  }
+
+  if (env.sig) {
+    properties.push(`sig: exportedVars.sigFunction("${env.sig}")`);
+  }
+
+  const code = `${data.output}\nreturn { ${properties.join(", ")} }`;
+
+  return new Function(code)();
+};
 
 const allowedOrigins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:4173"];
 
@@ -65,19 +82,26 @@ app.get("/api/getSong/:id", async (req, res) => {
 
   try {
     const id = ytdl.getVideoID(videoId);
-    const info = await ytdl.getInfo(id);
-    const audioFormat = ytdl.chooseFormat(info.formats, {
-      quality: "highestaudio",
-      filter: (f) => f.hasAudio && !f.hasVideo,
+
+    const innerTube = await Innertube.create({
+      cache: new UniversalCache(false),
+      generate_session_locally: true,
     });
 
-    res.setHeader("Content-Type", audioFormat.mimeType || "audio/mp4");
+    const info = await innerTube.getBasicInfo(id);
+
+    const audioStream = await info.download({ type: "audio" });
+
+    res.setHeader("Content-Type", "audio/mp4");
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Range");
     res.setHeader("Accept-Ranges", "bytes");
 
-    ytdl(id, { format: audioFormat }).pipe(res);
+    for await (const chunk of Utils.streamToIterable(audioStream)) {
+      res.write(chunk);
+    }
   } catch (err) {
+    console.log(err);
     res.status(500).send("Stream Error " + err.message);
   }
 });

@@ -23,6 +23,9 @@ importers:
       youtube-search-api:
         specifier: ^2.0.1
         version: 2.0.1
+      youtubei.js:
+        specifier: ^16.0.1
+        version: 16.0.1
       ytdl-core:
         specifier: npm:@distube/ytdl-core@^4.16.12
         version: '@distube/ytdl-core@4.16.12'
@@ -34,6 +37,9 @@ packages:
 
   '@borewit/text-codec@0.2.0':
     resolution: {integrity: sha512-X999CKBxGwX8wW+4gFibsbiNdwqmdQEXmUejIWaIqdrHBgS5ARIOOeyiQbHjP9G58xVEPcuvP6VwwH3A0OFTOA==}
+
+  '@bufbuild/protobuf@2.10.2':
+    resolution: {integrity: sha512-uFsRXwIGyu+r6AMdz+XijIIZJYpoWeYzILt5yZ2d3mCjQrWUTVpVD9WL/jZAbvp+Ed04rOhrsk7FiTcEDseB5A==}
 
   '@distube/ytdl-core@4.16.12':
     resolution: {integrity: sha512-/NR8Jur1Q4E2oD+DJta7uwWu7SkqdEkhwERt7f4iune70zg7ZlLLTOHs1+jgg3uD2jQjpdk7RGC16FqstG4RsA==}
@@ -330,6 +336,10 @@ packages:
     resolution: {integrity: sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==}
     engines: {node: '>=18'}
 
+  meriyah@6.1.4:
+    resolution: {integrity: sha512-Sz8FzjzI0kN13GK/6MVEsVzMZEPvOhnmmI1lU5+/1cGOiK3QUahntrNNtdVeihrO7t9JpoH75iMNXg6R6uWflQ==}
+    engines: {node: '>=18.0.0'}
+
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
@@ -546,11 +556,16 @@ packages:
   youtube-search-api@2.0.1:
     resolution: {integrity: sha512-hmaPrPiiZJTrG4TYtUALQtuXeS5fK8lyEmyG7HYetb+1UyJnpVGD4pC72KFadJVW9Fo39qVkPtu9OEsiQOFBEg==}
 
+  youtubei.js@16.0.1:
+    resolution: {integrity: sha512-3802bCAGkBc2/G5WUTc0l/bO5mPYJbQAHL04d9hE9PnrDHoBUT8MN721Yqt4RCNncAXdHcfee9VdJy3Fhq1r5g==}
+
 snapshots:
 
   '@borewit/text-codec@0.1.1': {}
 
   '@borewit/text-codec@0.2.0': {}
+
+  '@bufbuild/protobuf@2.10.2': {}
 
   '@distube/ytdl-core@4.16.12':
     dependencies:
@@ -883,6 +898,8 @@ snapshots:
 
   merge-descriptors@2.0.0: {}
 
+  meriyah@6.1.4: {}
+
   mime-db@1.52.0: {}
 
   mime-db@1.54.0: {}
@@ -1114,3 +1131,8 @@ snapshots:
       axios: 1.12.2
     transitivePeerDependencies:
       - debug
+
+  youtubei.js@16.0.1:
+    dependencies:
+      '@bufbuild/protobuf': 2.10.2
+      meriyah: 6.1.4
