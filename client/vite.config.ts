@@ -10,7 +10,7 @@ export default ({ mode }: { mode: string }) => {
 
   if (mode === "production") {
     if (ENVIRONS === "web-local") {
-      base = "/";
+      base = "/public";
     } else {
       base = "/music-visualizer-svelte";
     }

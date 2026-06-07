@@ -1,3 +1,5 @@
+*.exe
+
 # Logs
 logs
 *.log
@@ -28,6 +30,8 @@ client/src/vendor/font-awesome-4.7.0/less
 client/src/vendor/font-awesome-4.7.0/scss
 client/src/vendor/font-awesome-4.7.0/HELP-US-OUT.txt
 
+
+/songs/*.*
 #SONGS
 *.mp3
 *.mp4
