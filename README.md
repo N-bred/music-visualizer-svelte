@@ -1,20 +1,36 @@
-# 🎵 Svelte + Three JS Song Visualizer - V.1
+# 🎵 Svelte + Three JS Song Visualizer - V.2
 
-Welcome to the **Three JS Song Visualizer (with Svelte)**, a dynamic and theme-driven audio visualization project now entering its **Version 1** milestone. This initial phase introduces foundational functionality focused on delivering a visually engaging experience while maintaining responsive keyboard interaction and support for customized aesthetic themes.
+Welcome to the **Three JS Song Visualizer (with Svelte)**, a dynamic and theme-driven audio visualization project now entering its **Version 2** milestone.
 
 The visualizer is designed to work in sync with audio playback, allowing users to manipulate the playback and animation with precision, thanks to an intuitive keyboard command system.
 
 ---
 
-## NEW RELEASE (17/09/2025):
+## Getting Started
+
+The backend has been ported from Node.js to **Go**, using Go's `embed` package to bundle the built Svelte frontend into a single executable. No Docker, no Node.js, and no separate install steps — just download and run.
+
+1. Download the latest release for your platform from [Releases](https://github.com/N-bred/music-visualizer-svelte/releases).
+2. Run the executable.
+3. Open [http://localhost:3001](http://localhost:3001) in your browser.
+
+To load local audio files, place them in a `songs` folder next to the executable, or point to a custom folder with the `--songs` flag:
+
+```bash
+music-visualizer-svelte --songs /path/to/your/music
+```
+
+On Windows, run `music-visualizer-svelte.exe` from the folder where you extracted the release.
+
+---
+
+## NEW RELEASE (07/06/2026):
 
 An improved experience of the visualizer just came out, now with online song search functionality!
 
-Now, when you download the latest release, you will find a new search song button in the songs panel, this should allow you to look for your songs online without need of a local song file or the need to download anything, just pure streaming
+Now, when you download the latest release, you will find a new search song button in the songs panel. This lets you look for songs online without a local audio file — just pure streaming.
 
-Check it out: [Releases](https://github.com/N-bred/music-visualizer-svelte/releases/tag/v1.0.0)
-
-Note: You can either run the app by using docker and docker compose, or run it by executing a "npm start" command on the root folder, granted you have node on your system.
+Check it out: [Releases](https://github.com/N-bred/music-visualizer-svelte/releases/tag/v2.0.0)
 
 ## 🚀 Features
 
@@ -26,7 +42,7 @@ Note: You can either run the app by using docker and docker compose, or run it b
 - FPS counter
 - Persisted settings across sessions (via local storage)
 - Release supporting online song search!
-- "Load songs directly from your filesystem (server/src/songs)."
+- Load songs directly from your filesystem (place audio files in a `songs` folder next to the executable OR or point to a custom folder with the `--songs` flag)
 
 ---
 
@@ -67,8 +83,8 @@ The visualizer supports **custom themes**, allowing users to personalize their v
 
 ## 📦 Version Info
 
-- **Version**: 1.0.0
-- **Status**: First phase released
+- **Version**: 2.0.0
+- **Status**: Second Phase Released
 - **Upcoming**: Shader support, more prefabricated scenes, deeper customization for scene properties.
 
 ---
